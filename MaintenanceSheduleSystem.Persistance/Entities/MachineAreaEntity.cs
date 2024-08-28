@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MaintenanceSheduleSystem.Persistance.Entities
 {
-    internal class ServicesOrdersEntity
+    public class MachineAreaEntity
     {
     }
 }

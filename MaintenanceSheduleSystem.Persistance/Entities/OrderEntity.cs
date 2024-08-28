@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace MaintenanceSheduleSystem.Persistance.Entities
 {
-    internal class OrderEntity
+    public class OrderEntity
     {
+        public Guid Id { get; set; }
+        public string Name { get; set; } = string.Empty;
+        public string Description { get; set; } = string.Empty;
+
+        public ICollection<SparePartsEntity> SpareParts { get; set; } = [];
+        public ICollection<InstrumentEntity> Instruments { get; set; } = [];
     }
 }

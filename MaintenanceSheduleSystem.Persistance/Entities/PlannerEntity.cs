@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace MaintenanceSheduleSystem.Persistance.Entities
 {
-    internal class PlannerEntity
+    public class PlannerEntity
     {
+        public Guid UserId { get; set; }
+
     }
 }

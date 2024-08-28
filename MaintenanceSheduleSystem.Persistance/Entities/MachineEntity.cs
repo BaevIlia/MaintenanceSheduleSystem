@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace MaintenanceSheduleSystem.Persistance.Entities
 {
-    internal class MachineEntity
+    public class MachineEntity
     {
+        public Guid Id { get; set; }
+        public string Name { get; set; } = string.Empty;
+        public string SerialNumber { get; set; } = string.Empty;
+
+        public ICollection<MachineAreaEntity> Areas { get; set; } = [];
     }
 }

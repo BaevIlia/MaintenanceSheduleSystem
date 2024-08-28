@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace MaintenanceSheduleSystem.Persistance.Entities
 {
-    internal class AdminEntity
+    public class AdminEntity
     {
+        public Guid UserId { get; set; }
+        public string OwnAcceptKey { get; set; } = string.Empty;
+
     }
 }
