@@ -1,3 +1,5 @@
+using MaintenanceSheduleSystem.Persistance;
+using Microsoft.EntityFrameworkCore;
 namespace MaintenanceSheduleSystem.API
 {
     public class Program
@@ -11,6 +13,10 @@ namespace MaintenanceSheduleSystem.API
             // Add services to the container.
 
             builder.Services.AddControllers();
+            builder.Services.AddDbContext<ApplicationDbContext>(options =>
+            {
+                options.UseNpgsql(builder.Configuration.GetConnectionString("PostgreSQL"));
+            });
 
             var app = builder.Build();
 

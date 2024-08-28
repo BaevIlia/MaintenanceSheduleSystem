@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MaintenanceSheduleSystem.Core\MaintenanceSheduleSystem.Core.csproj" />
+  </ItemGroup>
+
 </Project>

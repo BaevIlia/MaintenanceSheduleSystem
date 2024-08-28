@@ -8,8 +8,12 @@ using MaintenanceSheduleSystem.Persistance.Entities;
 
 namespace MaintenanceSheduleSystem.Persistance
 {
-    internal class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : DbContext
     {
+        public ApplicationDbContext()
+        {
+            
+        }
         public DbSet<AdminEntity> Admins { get; set; }
         public DbSet<InstrumentEntity> Instruments { get; set; }
         public DbSet<MachineEntity> Machines { get; set; }
