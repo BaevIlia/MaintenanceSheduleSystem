@@ -3,20 +3,28 @@
   "WorkspaceRootPath": "E:\\Reps\\ASPProjects\\MaintenanceSheduleSystem\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\Reps\\ASPProjects\\MaintenanceSheduleSystem\\.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}"
+      "AbsoluteMoniker": "D:0:0:{61F46D78-3B09-4457-8C70-357798A53DE9}|MaintenanceSheduleSystem.API\\MaintenanceSheduleSystem.API.csproj|e:\\reps\\aspprojects\\maintenanceshedulesystem\\maintenanceshedulesystem.api\\controllers\\testapi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{61F46D78-3B09-4457-8C70-357798A53DE9}|MaintenanceSheduleSystem.API\\MaintenanceSheduleSystem.API.csproj|solutionrelative:maintenanceshedulesystem.api\\controllers\\testapi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{61F46D78-3B09-4457-8C70-357798A53DE9}|MaintenanceSheduleSystem.API\\MaintenanceSheduleSystem.API.csproj|e:\\reps\\aspprojects\\maintenanceshedulesystem\\maintenanceshedulesystem.api\\controllers\\hellocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{61F46D78-3B09-4457-8C70-357798A53DE9}|MaintenanceSheduleSystem.API\\MaintenanceSheduleSystem.API.csproj|solutionrelative:maintenanceshedulesystem.api\\controllers\\hellocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{3FC2FDCB-A7BE-419B-A91E-D8E5C86A005D}|MaintenanceSheduleSystem.Core\\MaintenanceSheduleSystem.Core.csproj|e:\\reps\\aspprojects\\maintenanceshedulesystem\\maintenanceshedulesystem.core\\models\\administrator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3FC2FDCB-A7BE-419B-A91E-D8E5C86A005D}|MaintenanceSheduleSystem.Core\\MaintenanceSheduleSystem.Core.csproj|solutionrelative:maintenanceshedulesystem.core\\models\\administrator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{61F46D78-3B09-4457-8C70-357798A53DE9}|MaintenanceSheduleSystem.API\\MaintenanceSheduleSystem.API.csproj|e:\\reps\\aspprojects\\maintenanceshedulesystem\\maintenanceshedulesystem.api\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{61F46D78-3B09-4457-8C70-357798A53DE9}|MaintenanceSheduleSystem.API\\MaintenanceSheduleSystem.API.csproj|solutionrelative:maintenanceshedulesystem.api\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{3FC2FDCB-A7BE-419B-A91E-D8E5C86A005D}|MaintenanceSheduleSystem.Core\\MaintenanceSheduleSystem.Core.csproj|e:\\reps\\aspprojects\\maintenanceshedulesystem\\maintenanceshedulesystem.core\\models\\fullname.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3FC2FDCB-A7BE-419B-A91E-D8E5C86A005D}|MaintenanceSheduleSystem.Core\\MaintenanceSheduleSystem.Core.csproj|solutionrelative:maintenanceshedulesystem.core\\models\\fullname.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{61F46D78-3B09-4457-8C70-357798A53DE9}|MaintenanceSheduleSystem.API\\MaintenanceSheduleSystem.API.csproj|e:\\reps\\aspprojects\\maintenanceshedulesystem\\maintenanceshedulesystem.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{61F46D78-3B09-4457-8C70-357798A53DE9}|MaintenanceSheduleSystem.API\\MaintenanceSheduleSystem.API.csproj|solutionrelative:maintenanceshedulesystem.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3FC2FDCB-A7BE-419B-A91E-D8E5C86A005D}|MaintenanceSheduleSystem.Core\\MaintenanceSheduleSystem.Core.csproj|e:\\reps\\aspprojects\\maintenanceshedulesystem\\maintenanceshedulesystem.core\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3FC2FDCB-A7BE-419B-A91E-D8E5C86A005D}|MaintenanceSheduleSystem.Core\\MaintenanceSheduleSystem.Core.csproj|solutionrelative:maintenanceshedulesystem.core\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{61F46D78-3B09-4457-8C70-357798A53DE9}|MaintenanceSheduleSystem.API\\MaintenanceSheduleSystem.API.csproj|e:\\reps\\aspprojects\\maintenanceshedulesystem\\maintenanceshedulesystem.api\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{61F46D78-3B09-4457-8C70-357798A53DE9}|MaintenanceSheduleSystem.API\\MaintenanceSheduleSystem.API.csproj|solutionrelative:maintenanceshedulesystem.api\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     }
   ],
   "DocumentGroupContainers": [
@@ -35,19 +43,56 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": ".gitignore",
-              "DocumentMoniker": "E:\\Reps\\ASPProjects\\MaintenanceSheduleSystem\\.gitignore",
-              "RelativeDocumentMoniker": ".gitignore",
-              "ToolTip": "E:\\Reps\\ASPProjects\\MaintenanceSheduleSystem\\.gitignore",
-              "RelativeToolTip": ".gitignore",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAADAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2024-08-28T08:08:16.459Z",
+              "Title": "TestAPI.cs",
+              "DocumentMoniker": "E:\\Reps\\ASPProjects\\MaintenanceSheduleSystem\\MaintenanceSheduleSystem.API\\Controllers\\TestAPI.cs",
+              "RelativeDocumentMoniker": "MaintenanceSheduleSystem.API\\Controllers\\TestAPI.cs",
+              "ToolTip": "E:\\Reps\\ASPProjects\\MaintenanceSheduleSystem\\MaintenanceSheduleSystem.API\\Controllers\\TestAPI.cs",
+              "RelativeToolTip": "MaintenanceSheduleSystem.API\\Controllers\\TestAPI.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABUAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-28T10:30:26.872Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Administrator.cs",
+              "DocumentMoniker": "E:\\Reps\\ASPProjects\\MaintenanceSheduleSystem\\MaintenanceSheduleSystem.Core\\Models\\Administrator.cs",
+              "RelativeDocumentMoniker": "MaintenanceSheduleSystem.Core\\Models\\Administrator.cs",
+              "ToolTip": "E:\\Reps\\ASPProjects\\MaintenanceSheduleSystem\\MaintenanceSheduleSystem.Core\\Models\\Administrator.cs",
+              "RelativeToolTip": "MaintenanceSheduleSystem.Core\\Models\\Administrator.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAqwAoAAACyAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-28T10:10:32.837Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
+              "Title": "FullName.cs",
+              "DocumentMoniker": "E:\\Reps\\ASPProjects\\MaintenanceSheduleSystem\\MaintenanceSheduleSystem.Core\\Models\\FullName.cs",
+              "RelativeDocumentMoniker": "MaintenanceSheduleSystem.Core\\Models\\FullName.cs",
+              "ToolTip": "E:\\Reps\\ASPProjects\\MaintenanceSheduleSystem\\MaintenanceSheduleSystem.Core\\Models\\FullName.cs",
+              "RelativeToolTip": "MaintenanceSheduleSystem.Core\\Models\\FullName.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-28T08:41:44.121Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "User.cs",
+              "DocumentMoniker": "E:\\Reps\\ASPProjects\\MaintenanceSheduleSystem\\MaintenanceSheduleSystem.Core\\Models\\User.cs",
+              "RelativeDocumentMoniker": "MaintenanceSheduleSystem.Core\\Models\\User.cs",
+              "ToolTip": "E:\\Reps\\ASPProjects\\MaintenanceSheduleSystem\\MaintenanceSheduleSystem.Core\\Models\\User.cs",
+              "RelativeToolTip": "MaintenanceSheduleSystem.Core\\Models\\User.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAdAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-28T08:12:51.665Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "launchSettings.json",
               "DocumentMoniker": "E:\\Reps\\ASPProjects\\MaintenanceSheduleSystem\\MaintenanceSheduleSystem.API\\Properties\\launchSettings.json",
               "RelativeDocumentMoniker": "MaintenanceSheduleSystem.API\\Properties\\launchSettings.json",
@@ -55,21 +100,7 @@
               "RelativeToolTip": "MaintenanceSheduleSystem.API\\Properties\\launchSettings.json",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAAuAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-08-28T08:04:20.356Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "HelloController.cs",
-              "DocumentMoniker": "E:\\Reps\\ASPProjects\\MaintenanceSheduleSystem\\MaintenanceSheduleSystem.API\\Controllers\\HelloController.cs",
-              "RelativeDocumentMoniker": "MaintenanceSheduleSystem.API\\Controllers\\HelloController.cs",
-              "ToolTip": "E:\\Reps\\ASPProjects\\MaintenanceSheduleSystem\\MaintenanceSheduleSystem.API\\Controllers\\HelloController.cs",
-              "RelativeToolTip": "MaintenanceSheduleSystem.API\\Controllers\\HelloController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAJAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-28T08:01:07.835Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-28T08:04:20.356Z"
             },
             {
               "$type": "Document",
@@ -79,10 +110,9 @@
               "RelativeDocumentMoniker": "MaintenanceSheduleSystem.API\\Program.cs",
               "ToolTip": "E:\\Reps\\ASPProjects\\MaintenanceSheduleSystem\\MaintenanceSheduleSystem.API\\Program.cs",
               "RelativeToolTip": "MaintenanceSheduleSystem.API\\Program.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAAAjAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-28T07:56:30.374Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-28T07:56:30.374Z"
             }
           ]
         }

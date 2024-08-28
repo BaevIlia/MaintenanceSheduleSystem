@@ -12,4 +12,11 @@
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="6.7.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MaintenanceSheduleSystem.Application\MaintenanceSheduleSystem.Application.csproj" />
+    <ProjectReference Include="..\MaintenanceSheduleSystem.Core\MaintenanceSheduleSystem.Core.csproj" />
+    <ProjectReference Include="..\MaintenanceSheduleSystem.Infrastructure\MaintenanceSheduleSystem.Infrastructure.csproj" />
+    <ProjectReference Include="..\MaintenanceSheduleSystem.Persistance\MaintenanceSheduleSystem.Persistance.csproj" />
+  </ItemGroup>
+
 </Project>
