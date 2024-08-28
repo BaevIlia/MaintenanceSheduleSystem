@@ -1,12 +1,7 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "E:\\Reps\\ASPProjects\\MaintenanceSheduleSystem\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{61F46D78-3B09-4457-8C70-357798A53DE9}|MaintenanceSheduleSystem.API\\MaintenanceSheduleSystem.API.csproj|e:\\reps\\aspprojects\\maintenanceshedulesystem\\maintenanceshedulesystem.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{61F46D78-3B09-4457-8C70-357798A53DE9}|MaintenanceSheduleSystem.API\\MaintenanceSheduleSystem.API.csproj|solutionrelative:maintenanceshedulesystem.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    }
-  ],
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -14,21 +9,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": -1,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Program.cs",
-              "DocumentMoniker": "E:\\Reps\\ASPProjects\\MaintenanceSheduleSystem\\MaintenanceSheduleSystem.API\\Program.cs",
-              "RelativeDocumentMoniker": "MaintenanceSheduleSystem.API\\Program.cs",
-              "ToolTip": "E:\\Reps\\ASPProjects\\MaintenanceSheduleSystem\\MaintenanceSheduleSystem.API\\Program.cs",
-              "RelativeToolTip": "MaintenanceSheduleSystem.API\\Program.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAzAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-28T06:58:30.96Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
