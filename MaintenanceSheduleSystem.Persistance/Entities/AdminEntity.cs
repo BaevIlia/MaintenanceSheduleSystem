@@ -11,5 +11,6 @@ namespace MaintenanceSheduleSystem.Persistance.Entities
         public Guid UserId { get; set; }
         public string OwnAcceptKey { get; set; } = string.Empty;
 
+        public UserEntity? User { get; set; }
     }
 }
