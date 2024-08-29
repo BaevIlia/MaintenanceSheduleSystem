@@ -18,26 +18,16 @@ namespace MaintenanceSheduleSystem.Persistance.Configurations
         {
             builder.HasKey(u => u.Id);
 
-            builder.ToTable("Users")
-            .SplitToTable(
-                "Administrators",
-                tableBuilder =>
-                {
-                    tableBuilder.Property(u => u.Id).HasColumnName("UserId");
-                    tableBuilder.Property(u => u.FullName);
-                    tableBuilder.Property(u => u.Email);
-                    tableBuilder.Property(u => u.HashedPassword);
-                    tableBuilder.Property(u => u.OwnAcceptKey);
-                })
-            .SplitToTable(
-                "Services",
-                tableBuilder =>
-                {
-                    tableBuilder.Property(u => u.Id).HasColumnName("UserId");
-                    tableBuilder.Property(u => u.FullName);
-                    tableBuilder.Property(u => u.Email);
-                    tableBuilder.Property(u => u.HashedPassword);
-                });
+            builder.HasOne(u => u.AdministratorEntity)
+                .WithOne(a => a.UserEntity)
+                .HasForeignKey<AdministratorEntity>(ua => ua.UserId);
+            builder.HasOne(u => u.PlannerEngineerEntity)
+                .WithOne(p => p.UserEntity)
+                .HasForeignKey<PlannerEngineerEntity>(up => up.UserId);
+
+            builder.HasOne(u => u.ServicemanEntity)
+                .WithOne(s => s.UserEntity)
+                .HasForeignKey<ServicemanEntity>(us => us.UserId);
         }
     }
 }

@@ -19,14 +19,17 @@ namespace MaintenanceSheduleSystem.Persistance
         public DbSet<AdministratorEntity> Administrators { get; set; }
         public DbSet<PlannerEngineerEntity> PlannerEngineers { get; set; }
         public DbSet<ServicemanEntity> Servicemens { get; set; }
-        public DbSet<InstrumentEntity> Instruments { get; set; }
+      /*  public DbSet<InstrumentEntity> Instruments { get; set; }
         public DbSet<MachineEntity> Machines { get; set; }
         public DbSet<OrderEntity> Orders { get; set; }
-        public DbSet<SparePartsEntity> SpareParts { get; set; }
+        public DbSet<SparePartsEntity> SpareParts { get; set; }*/
         public DbSet<UserEntity> Users { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new UserConfiguration());
+            modelBuilder.ApplyConfiguration(new AdministratorConfiguration());
+            modelBuilder.ApplyConfiguration(new PlannerEngineerConfiguration());
+            modelBuilder.ApplyConfiguration(new ServicemanConfiguration());
             
         }
     }

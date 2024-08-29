@@ -8,5 +8,7 @@ namespace MaintenanceSheduleSystem.Persistance.Entities
 {
     public class ServicemanEntity
     {
+        public Guid UserId { get; set; }
+        public UserEntity? UserEntity { get; set; }
     }
 }
