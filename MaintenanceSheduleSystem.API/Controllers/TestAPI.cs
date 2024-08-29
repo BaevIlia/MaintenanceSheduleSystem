@@ -26,7 +26,7 @@ namespace MaintenanceSheduleSystem.API.Controllers
         [HttpPost("createService")]
         public async Task<IActionResult> CreateService(string email, string password, string surname, string firstName, string lastName)
         {
-            User administrator = ServicePersonal.Create(Guid.NewGuid(), email, password, new FullName(surname, firstName, lastName), null);
+            User administrator = Serviceman.Create(Guid.NewGuid(), email, password, new FullName(surname, firstName, lastName), null);
             return Ok(administrator);
         }
 

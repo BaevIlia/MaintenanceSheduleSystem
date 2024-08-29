@@ -16,7 +16,9 @@ namespace MaintenanceSheduleSystem.Persistance
             
         }
 
-
+        public DbSet<AdministratorEntity> Administrators { get; set; }
+        public DbSet<PlannerEngineerEntity> PlannerEngineers { get; set; }
+        public DbSet<ServicemanEntity> Servicemens { get; set; }
         public DbSet<InstrumentEntity> Instruments { get; set; }
         public DbSet<MachineEntity> Machines { get; set; }
         public DbSet<OrderEntity> Orders { get; set; }
