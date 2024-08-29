@@ -15,7 +15,7 @@ namespace MaintenanceSheduleSystem.API
             builder.Services.AddControllers();
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
             {
-                options.UseNpgsql(builder.Configuration.GetConnectionString("PostgreSQL"));
+                options.UseNpgsql(builder.Configuration.GetConnectionString("PostgreSQL"), b=>b.MigrationsAssembly("MaintenanceSheduleSystem.Persistance"));
             });
 
             var app = builder.Build();

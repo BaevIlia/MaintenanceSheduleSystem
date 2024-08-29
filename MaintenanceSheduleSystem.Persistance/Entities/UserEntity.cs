@@ -13,11 +13,11 @@ namespace MaintenanceSheduleSystem.Persistance.Entities
         public Guid Id { get; set; }
         public string Email { get; set; } = string.Empty;
         public string HashedPassword { get; set; } = string.Empty;
-        public FullName? FullName { get; set; }
+        public string? FullName { get; set; }
         public Roles Role { get; set; }
-        public AdminEntity? Admin { get; set; }
-        public PlannerEntity? Planner { get; set; }
-        public ServiceEntity? Service { get; set; }
+        public string OwnAcceptKey { get; set; } = string.Empty;
+
+        
         
     }
 }
