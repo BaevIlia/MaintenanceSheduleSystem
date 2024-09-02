@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 
 namespace MaintenanceSheduleSystem.Persistance.Entities
 {
-    public class SparePartsEntity
+    public class TypeOfWork
     {
         public Guid Id { get; set; }
         public string Name { get; set; } = string.Empty;
-        public int Count { get; set; }
-        public bool IsCritical { get; set; }
-        public string Place { get; set; } = string.Empty;
+        public string Type { get; set; } = string.Empty;
+        public string WorkDescription { get; set; } = string.Empty;
     }
 }

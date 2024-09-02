@@ -9,14 +9,14 @@ using System.Threading.Tasks;
 
 namespace MaintenanceSheduleSystem.Persistance.Configurations
 {
-    public class AdministratorConfiguration : IEntityTypeConfiguration<AdministratorEntity>
+    public class ServicemanEntityConfiguration : IEntityTypeConfiguration<ServicemanEntity>
     {
-        public void Configure(EntityTypeBuilder<AdministratorEntity> builder)
+        public void Configure(EntityTypeBuilder<ServicemanEntity> builder)
         {
-            builder.HasKey(a => a.UserId);
+            builder.HasKey(sm => sm.UserId);
 
-            builder.HasOne(a => a.UserEntity)
-                .WithOne(u => u.AdministratorEntity);
+            builder.HasOne(sm => sm.UserEntity)
+                .WithOne(u => u.ServicemanEntity);
         }
     }
 }

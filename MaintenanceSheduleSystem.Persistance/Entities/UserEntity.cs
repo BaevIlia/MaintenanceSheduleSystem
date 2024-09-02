@@ -18,6 +18,7 @@ namespace MaintenanceSheduleSystem.Persistance.Entities
         public AdministratorEntity? AdministratorEntity { get; set; }
         public PlannerEngineerEntity? PlannerEngineerEntity { get; set; }
         public ServicemanEntity? ServicemanEntity { get; set; }
+        public StorekeeperEntity? StorekeeperEntity { get; set; }
 
         
         

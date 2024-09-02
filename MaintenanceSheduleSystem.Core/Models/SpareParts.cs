@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MaintenanceSheduleSystem.Persistance.Entities
+namespace MaintenanceSheduleSystem.Core.Models
 {
-    public class InstrumentEntity
+    public class SpareParts
     {
         public Guid Id { get; set; }
         public string Article { get; set; } = string.Empty;
@@ -14,5 +14,6 @@ namespace MaintenanceSheduleSystem.Persistance.Entities
         public string StoragePlace { get; set; } = string.Empty;
 
         public bool IsInStock { get; set; }
+
     }
 }

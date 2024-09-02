@@ -1,6 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using MaintenanceSheduleSystem.Persistance.Entities;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using MaintenanceSheduleSystem.Persistance.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,9 +16,7 @@ namespace MaintenanceSheduleSystem.Persistance.Configurations
             builder.HasKey(p => p.UserId);
 
             builder.HasOne(p => p.UserEntity)
-                .WithOne(u => u.PlannerEngineerEntity)
-                .HasForeignKey<PlannerEngineerEntity>(pu => pu.UserId);
-
+                .WithOne(u => u.PlannerEngineerEntity);
         }
     }
 }

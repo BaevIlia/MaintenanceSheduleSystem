@@ -1,18 +1,15 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using MaintenanceSheduleSystem.Persistance.Entities;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using MaintenanceSheduleSystem.Persistance.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
-///TODO:
-///сконфигурировать все сущности, занести предварительные данные, попробовать миграции
 namespace MaintenanceSheduleSystem.Persistance.Configurations
 {
-    public class UserConfiguration : IEntityTypeConfiguration<UserEntity>
+    public class UserEntityConfiguration : IEntityTypeConfiguration<UserEntity>
     {
         public void Configure(EntityTypeBuilder<UserEntity> builder)
         {
@@ -20,14 +17,20 @@ namespace MaintenanceSheduleSystem.Persistance.Configurations
 
             builder.HasOne(u => u.AdministratorEntity)
                 .WithOne(a => a.UserEntity)
-                .HasForeignKey<AdministratorEntity>(ua => ua.UserId);
+                .HasForeignKey<AdministratorConfiguration>(ua => ua.UserId);
+
             builder.HasOne(u => u.PlannerEngineerEntity)
                 .WithOne(p => p.UserEntity)
-                .HasForeignKey<PlannerEngineerEntity>(up => up.UserId);
+                .HasForeignKey<PlannerEngineerConfiguration>(up => up.UserId);
 
             builder.HasOne(u => u.ServicemanEntity)
                 .WithOne(s => s.UserEntity)
-                .HasForeignKey<ServicemanEntity>(us => us.UserId);
+                .HasForeignKey<ServicemanEntity>(up => up.UserId);
+
+
+            builder.HasOne(u => u.StorekeeperEntity)
+                .WithOne(p => p.UserEntity)
+                .HasForeignKey<PlannerEngineerConfiguration>(up => up.UserId);
         }
     }
 }
