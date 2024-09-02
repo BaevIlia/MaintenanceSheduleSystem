@@ -14,5 +14,7 @@ namespace MaintenanceSheduleSystem.Persistance.Entities
         public string AreaDescription { get; set; } =string.Empty;
         public Guid HandbookId { get; set; }
         public MachineEntity? Machine { get; set; }
+        public ICollection<OrderEntity>? Orders { get; set; }
+        public ICollection<HandbookEntity>? Handbooks { get; set; }
     }
 }

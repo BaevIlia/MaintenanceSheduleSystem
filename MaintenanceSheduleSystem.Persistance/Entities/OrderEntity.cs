@@ -10,13 +10,14 @@ namespace MaintenanceSheduleSystem.Persistance.Entities
     public class OrderEntity
     {
         public Guid Id { get; set; }
+        public Guid AreaId { get; set; }
         public string Name { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
         public string ServicemanName { get; set; } = string.Empty;
         public DateTime StartDateTime { get; set; }
         public DateTime BeginWorkDateTime { get; set; }
         public DateTime CompliteDateTime { get; set; }
-
+        public MachineAreaEntity? MachineArea { get; set; }
         public ServicemanEntity? Serviceman { get; set; }
     }
 }
