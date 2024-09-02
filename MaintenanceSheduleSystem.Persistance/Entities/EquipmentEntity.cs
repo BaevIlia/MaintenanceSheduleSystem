@@ -16,5 +16,7 @@ namespace MaintenanceSheduleSystem.Persistance.Entities
         public EquipmentTypes EquipmentType  { get; set; }
         public bool IsCritical { get; set; }
         public bool IsInStock { get; set; }
+
+        public ICollection<HandbookEntity>? HandbooksLists { get; set; }
     }
 }

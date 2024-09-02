@@ -16,6 +16,7 @@ namespace MaintenanceSheduleSystem.Persistance.Entities
         public Guid EquipmentListId { get; set; }
 
         public MachineAreaEntity? MachineArea { get; set; }
+        public ICollection<EquipmentEntity>? EquipmentLists { get; set; }
   
     }
 }
