@@ -19,5 +19,7 @@ namespace MaintenanceSheduleSystem.Persistance.Entities
         public DateTime CompliteDateTime { get; set; }
         public MachineAreaEntity? MachineArea { get; set; }
         public ServicemanEntity? Serviceman { get; set; }
+
+        public ICollection<EquipmentEntity>? Equipments { get; set; }
     }
 }

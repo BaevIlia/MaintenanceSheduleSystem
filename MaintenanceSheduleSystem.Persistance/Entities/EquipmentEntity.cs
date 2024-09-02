@@ -18,5 +18,6 @@ namespace MaintenanceSheduleSystem.Persistance.Entities
         public bool IsInStock { get; set; }
 
         public ICollection<HandbookEntity>? HandbooksLists { get; set; }
+        public ICollection<OrderEntity>? Orders { get; set; }
     }
 }
