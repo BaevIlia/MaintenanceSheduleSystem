@@ -15,6 +15,7 @@ namespace MaintenanceSheduleSystem.Persistance.Entities
         public string HashedPassword { get; set; } = string.Empty;
         public string? FullName { get; set; }
         public Roles Role { get; set; }
+        public bool IsSacked { get; set; }
         public AdministratorEntity? AdministratorEntity { get; set; }
         public PlannerEngineerEntity? PlannerEngineerEntity { get; set; }
         public ServicemanEntity? ServicemanEntity { get; set; }
