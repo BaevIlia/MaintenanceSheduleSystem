@@ -12,6 +12,6 @@ namespace MaintenanceSheduleSystem.Persistance.Entities
         public string Name { get; set; } = string.Empty;
         public string SerialNumber { get; set; } = string.Empty;
 
-        public ICollection<MachineAreaEntity> Areas { get; set; } = [];
+        public ICollection<MachineAreaEntity>? Areas { get; set; }
     }
 }

@@ -10,5 +10,7 @@ namespace MaintenanceSheduleSystem.Persistance.Entities
     {
         public Guid UserId { get; set; }
         public UserEntity? UserEntity { get; set; }
+        public ICollection<OrderEntity>? Orders { get; set; } 
+
     }
 }

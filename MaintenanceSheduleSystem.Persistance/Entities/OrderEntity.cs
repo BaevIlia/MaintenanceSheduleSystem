@@ -16,5 +16,7 @@ namespace MaintenanceSheduleSystem.Persistance.Entities
         public DateTime StartDateTime { get; set; }
         public DateTime BeginWorkDateTime { get; set; }
         public DateTime CompliteDateTime { get; set; }
+
+        public ServicemanEntity? Serviceman { get; set; }
     }
 }

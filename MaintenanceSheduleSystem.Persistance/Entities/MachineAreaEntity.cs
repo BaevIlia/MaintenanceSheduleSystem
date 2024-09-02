@@ -8,5 +8,11 @@ namespace MaintenanceSheduleSystem.Persistance.Entities
 {
     public class MachineAreaEntity
     {
+        public Guid Id { get; set; }
+        public Guid MachineId { get; set; }
+        public string AreaName { get; set; } = string.Empty;
+        public string AreaDescription { get; set; } =string.Empty;
+        public Guid HandbookId { get; set; }
+        public MachineEntity? Machine { get; set; }
     }
 }
