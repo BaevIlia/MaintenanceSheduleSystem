@@ -18,9 +18,28 @@ namespace MaintenanceSheduleSystem.Persistance
 
     
         public DbSet<UserEntity> Users { get; set; }
+        public DbSet<AdministratorEntity> Administrators { get; set; }
+        public DbSet<PlannerEngineerEntity> PlannerEngineers { get; set; }
+        public DbSet<ServicemanEntity> Servicemen { get; set; }
+        public DbSet<EquipmentEntity> Equipments { get; set; }
+        public DbSet<HandbookEntity> Handbooks { get; set; }
+        public DbSet<MachineEntity> Machines { get; set; }
+        public DbSet<OrderEntity> Orders { get; set; }
+        public DbSet<MachineAreaEntity> MachineAreas { get; set; }
+        public DbSet<HandbookEquipmentEntity> HandbookEquipment { get; set; }
+        public DbSet<OrderEquipmentEntity> OrderEquipment { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            
+            modelBuilder.ApplyConfiguration(new AdministratorEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new EquipmentEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new HandbookEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new MachineAreaEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new MachineEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new OrderEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new PlannerEngineerEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new ServicemanEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new UserEntityConfiguration());
+
         }
     }
 }

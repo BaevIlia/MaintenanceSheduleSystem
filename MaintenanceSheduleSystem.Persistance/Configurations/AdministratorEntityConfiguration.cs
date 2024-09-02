@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MaintenanceSheduleSystem.Persistance.Configurations
 {
-    public class AdministratorConfiguration : IEntityTypeConfiguration<AdministratorEntity>
+    public class AdministratorEntityConfiguration : IEntityTypeConfiguration<AdministratorEntity>
     {
         public void Configure(EntityTypeBuilder<AdministratorEntity> builder)
         {

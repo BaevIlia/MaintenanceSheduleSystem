@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MaintenanceSheduleSystem.Persistance.Configurations
 {
-    public class PlannerEngineerConfiguration : IEntityTypeConfiguration<PlannerEngineerEntity>
+    public class PlannerEngineerEntityConfiguration : IEntityTypeConfiguration<PlannerEngineerEntity>
     {
         public void Configure(EntityTypeBuilder<PlannerEngineerEntity> builder)
         {
