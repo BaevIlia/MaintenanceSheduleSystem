@@ -19,8 +19,8 @@ namespace MaintenanceSheduleSystem.Persistance.Configurations
                 .WithMany(ma => ma.Handbooks)
                 .HasForeignKey(h => h.AreaId);
 
-            builder.HasMany(h => h.EquipmentLists)
-                .WithMany(eq => eq.HandbooksLists)
+            builder.HasMany(h => h.Equipments)
+                .WithMany(eq => eq.Handbooks)
                 .UsingEntity<HandbookEquipmentEntity>();
             
         }

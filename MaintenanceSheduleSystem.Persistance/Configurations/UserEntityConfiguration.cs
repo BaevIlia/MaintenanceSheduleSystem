@@ -17,20 +17,18 @@ namespace MaintenanceSheduleSystem.Persistance.Configurations
 
             builder.HasOne(u => u.AdministratorEntity)
                 .WithOne(a => a.UserEntity)
-                .HasForeignKey<AdministratorEntityConfiguration>(ua => ua.UserId);
+                .HasForeignKey<AdministratorEntity>(ua => ua.UserId);
 
             builder.HasOne(u => u.PlannerEngineerEntity)
                 .WithOne(p => p.UserEntity)
-                .HasForeignKey<PlannerEngineerEntityConfiguration>(up => up.UserId);
+                .HasForeignKey<PlannerEngineerEntity>(up => up.UserId);
 
             builder.HasOne(u => u.ServicemanEntity)
                 .WithOne(s => s.UserEntity)
                 .HasForeignKey<ServicemanEntity>(up => up.UserId);
 
 
-            builder.HasOne(u => u.StorekeeperEntity)
-                .WithOne(p => p.UserEntity)
-                .HasForeignKey<PlannerEngineerEntityConfiguration>(up => up.UserId);
+
         }
     }
 }
