@@ -26,7 +26,7 @@ namespace MaintenanceSheduleSystem.Persistance.Configurations
 
             builder.HasMany(o => o.Equipments)
                 .WithMany(e => e.Orders)
-                .UsingEntity<OrderEquipmentList>();
+                .UsingEntity<OrderEquipmentEntity>();
         }
     }
 }

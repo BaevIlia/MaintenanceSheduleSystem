@@ -17,7 +17,7 @@ namespace MaintenanceSheduleSystem.Persistance.Entities
         public bool IsCritical { get; set; }
         public bool IsInStock { get; set; }
 
-        public ICollection<HandbookEntity>? HandbooksLists { get; set; }
+        public ICollection<HandbookEntity>? Handbooks { get; set; }
         public ICollection<OrderEntity>? Orders { get; set; }
     }
 }
