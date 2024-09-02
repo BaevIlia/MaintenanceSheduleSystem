@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace MaintenanceSheduleSystem.Persistance.Entities
 {
-    public class StorekeeperEntity
+    public class AreaEquipmentEntity
     {
-        public Guid UserId { get; set; }
-        public UserEntity? UserEntity { get; set; }
+        public Guid AreaId { get; set; }
+        public Guid EquipmentId { get; set; }
     }
 }
