@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MaintenanceSheduleSystem.Persistance.Entities
 {
-    public class AdministratorEntity : UserEntity
+    public class AdministratorEntity
     {
         public Guid UserId { get; set; }
         public string SigningKey { get; set; } = string.Empty;

@@ -1,5 +1,6 @@
 ﻿using MaintenanceSheduleSystem.Core;
 using MaintenanceSheduleSystem.Core.Models;
+using MaintenanceSheduleSystem.Persistance.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,9 +20,10 @@ namespace MaintenanceSheduleSystem.Persistance.Repositories
             _userRepository = userRepository;
         }
 
-        public async Task AddAdministrator(Administrator administartor)
+        public async Task AddAdministrator(User userEntity, Administrator administratorEntity)
         {
-            _dbContext.Add(administartor);
+            _dbContext.Add(userEntity);
+            _dbContext.Add(administratorEntity);
 
             await _dbContext.SaveChangesAsync();
         }
