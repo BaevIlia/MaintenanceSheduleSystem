@@ -25,7 +25,7 @@
     <ProjectReference Include="..\MaintenanceSheduleSystem.Application\MaintenanceSheduleSystem.Application.csproj" />
     <ProjectReference Include="..\MaintenanceSheduleSystem.Core\MaintenanceSheduleSystem.Core.csproj" />
     <ProjectReference Include="..\MaintenanceSheduleSystem.Infrastructure\MaintenanceSheduleSystem.Infrastructure.csproj" />
-    <ProjectReference Include="..\MaintenanceSheduleSystem.Persistance\MaintenanceSheduleSystem.Persistance.csproj" />
+    <ProjectReference Include="..\MaintenanceSheduleSystem.Persistence\MaintenanceSheduleSystem.Persistence.csproj" />
   </ItemGroup>
 
 </Project>

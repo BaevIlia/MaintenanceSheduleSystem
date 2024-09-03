@@ -1,4 +1,8 @@
+using MaintenanceSheduleSystem.Core.Interfaces;
+using MaintenanceSheduleSystem.Infrastructure.Services;
 using MaintenanceSheduleSystem.Persistance;
+using MaintenanceSheduleSystem.Infrastructure;
+using MaintenanceSheduleSystem.Persistance.Repositories;
 using Microsoft.EntityFrameworkCore;
 namespace MaintenanceSheduleSystem.API
 {
@@ -13,10 +17,9 @@ namespace MaintenanceSheduleSystem.API
             // Add services to the container.
 
             builder.Services.AddControllers();
-            builder.Services.AddDbContext<ApplicationDbContext>(options =>
-            {
-                options.UseNpgsql(builder.Configuration.GetConnectionString("PostgreSQL"), b=>b.MigrationsAssembly("MaintenanceSheduleSystem.Persistance"));
-            });
+
+            builder.Services.AddPersistence(builder.Configuration);
+            builder.Services.AddApplication();
 
             var app = builder.Build();
 

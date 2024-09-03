@@ -1,4 +1,4 @@
-﻿using MaintenanceSheduleSystem.Core;
+﻿using MaintenanceSheduleSystem.Core.Interfaces;
 using MaintenanceSheduleSystem.Core.Models;
 using MaintenanceSheduleSystem.Persistance.Entities;
 using System;
@@ -12,18 +12,26 @@ namespace MaintenanceSheduleSystem.Persistance.Repositories
     public class UserRepository : IUserRepository
     {
         private readonly ApplicationDbContext _dbContext;
-        private readonly IUserRepository _userRepository;
 
-        public UserRepository(ApplicationDbContext dbContext, IUserRepository userRepository)
+        public UserRepository(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
-            _userRepository = userRepository;
         }
 
-        public async Task AddAdministrator(User userEntity, Administrator administratorEntity)
+        public async Task AddAdministrator(Administrator administratorEntity)
         {
-            _dbContext.Add(userEntity);
-            _dbContext.Add(administratorEntity);
+            UserEntity userPart = new UserEntity()
+            {
+                Id = administratorEntity.Id,
+                FullName = administratorEntity.FullName.ToString(),
+                Email = administratorEntity.Email,
+                HashedPassword = administratorEntity.HashedPassword,
+                Role = Core.Enums.Roles.Admin,
+                IsSacked = false,
+            };
+            AdministratorEntity administrator = new AdministratorEntity() { UserId = userPart.Id, SigningKey = "1223" };
+            _dbContext.Users.Add(userPart);
+            _dbContext.Administrators.Add(administrator);
 
             await _dbContext.SaveChangesAsync();
         }
