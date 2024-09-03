@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MaintenanceSheduleSystem.Persistance.Entities
+namespace MaintenanceSheduleSystem.Persistence.Entities
 {
     public class OrderEntity
     {

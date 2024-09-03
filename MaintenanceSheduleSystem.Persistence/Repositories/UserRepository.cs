@@ -1,13 +1,14 @@
 ﻿using MaintenanceSheduleSystem.Core.Interfaces;
 using MaintenanceSheduleSystem.Core.Models;
-using MaintenanceSheduleSystem.Persistance.Entities;
+using MaintenanceSheduleSystem.Persistence.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MaintenanceSheduleSystem.Persistance.Repositories
+
+namespace MaintenanceSheduleSystem.Persistence.Repositories
 {
     public class UserRepository : IUserRepository
     {
@@ -29,9 +30,8 @@ namespace MaintenanceSheduleSystem.Persistance.Repositories
                 Role = Core.Enums.Roles.Admin,
                 IsSacked = false,
             };
-            AdministratorEntity administrator = new AdministratorEntity() { UserId = userPart.Id, SigningKey = "1223" };
             _dbContext.Users.Add(userPart);
-            _dbContext.Administrators.Add(administrator);
+          
 
             await _dbContext.SaveChangesAsync();
         }

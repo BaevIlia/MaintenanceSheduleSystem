@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MaintenanceSheduleSystem.Persistance.Entities
+namespace MaintenanceSheduleSystem.Persistence.Entities
 {
     public class UserEntity
     {
@@ -16,9 +16,7 @@ namespace MaintenanceSheduleSystem.Persistance.Entities
         public string? FullName { get; set; }
         public Roles Role { get; set; }
         public bool IsSacked { get; set; }
-        public AdministratorEntity? AdministratorEntity { get; set; }
-        public PlannerEngineerEntity? PlannerEngineerEntity { get; set; }
-        public ServicemanEntity? ServicemanEntity { get; set; }
+
 
         
         

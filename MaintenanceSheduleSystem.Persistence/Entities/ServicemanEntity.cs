@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MaintenanceSheduleSystem.Persistance.Entities
+namespace MaintenanceSheduleSystem.Persistence.Entities
 {
-    public class ServicemanEntity 
-    {
-        public Guid UserId { get; set; }
-        public UserEntity? UserEntity { get; set; }
+    [Table("Servicemen")]
+    public class ServicemanEntity : UserEntity 
+    { 
         public ICollection<OrderEntity>? Orders { get; set; } 
-
     }
 }

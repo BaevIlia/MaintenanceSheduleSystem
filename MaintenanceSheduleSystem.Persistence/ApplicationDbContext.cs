@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MaintenanceSheduleSystem.Persistance.Entities;
-using MaintenanceSheduleSystem.Persistance.Configurations;
+using MaintenanceSheduleSystem.Persistence.Configurations;
+using MaintenanceSheduleSystem.Persistence.Entities;
 
-namespace MaintenanceSheduleSystem.Persistance
+
+namespace MaintenanceSheduleSystem.Persistence
 {
     public class ApplicationDbContext : DbContext
     {
@@ -30,13 +31,12 @@ namespace MaintenanceSheduleSystem.Persistance
         public DbSet<OrderEquipmentEntity> OrderEquipment { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new AdministratorEntityConfiguration());
+     
             modelBuilder.ApplyConfiguration(new EquipmentEntityConfiguration());
             modelBuilder.ApplyConfiguration(new HandbookEntityConfiguration());
             modelBuilder.ApplyConfiguration(new MachineAreaEntityConfiguration());
             modelBuilder.ApplyConfiguration(new MachineEntityConfiguration());
             modelBuilder.ApplyConfiguration(new OrderEntityConfiguration());
-            modelBuilder.ApplyConfiguration(new PlannerEngineerEntityConfiguration());
             modelBuilder.ApplyConfiguration(new ServicemanEntityConfiguration());
             modelBuilder.ApplyConfiguration(new UserEntityConfiguration());
 

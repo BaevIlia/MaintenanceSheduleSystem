@@ -1,14 +1,14 @@
-﻿using System;
+﻿using MaintenanceSheduleSystem.Persistence.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MaintenanceSheduleSystem.Persistance.Entities
+namespace MaintenanceSheduleSystem.Persistence.Entities
 {
-    public class PlannerEngineerEntity 
+    public class PlannerEngineerEntity : UserEntity
     {
-        public Guid UserId { get; set; }
-        public UserEntity? UserEntity { get; set; }
+        public string Title { get; set; } = string.Empty;
     }
 }

@@ -1,5 +1,5 @@
 ﻿using MaintenanceSheduleSystem.Core.Interfaces;
-using MaintenanceSheduleSystem.Persistance.Repositories;
+using MaintenanceSheduleSystem.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MaintenanceSheduleSystem.Persistance
+namespace MaintenanceSheduleSystem.Persistence
 {
     public static class PersistenceExtensions
     {

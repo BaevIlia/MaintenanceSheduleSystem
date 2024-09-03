@@ -1,4 +1,4 @@
-﻿using MaintenanceSheduleSystem.Persistance.Entities;
+﻿using MaintenanceSheduleSystem.Persistence.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MaintenanceSheduleSystem.Persistance.Configurations
+namespace MaintenanceSheduleSystem.Persistence.Configurations
 {
     public class OrderEntityConfiguration : IEntityTypeConfiguration<OrderEntity>
     {
