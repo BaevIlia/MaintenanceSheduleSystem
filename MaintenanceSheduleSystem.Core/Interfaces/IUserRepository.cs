@@ -10,7 +10,7 @@ namespace MaintenanceSheduleSystem.Core.Interfaces
 {
     public interface IUserRepository
     {
-        Task AddAdministrator(Administrator administratorEntity);
+        Task AddAdministrator(Administrator administrator);
         Task AddPlannerEngineer(PlannerEngineer plannerEngineer);
         Task AddServiceman(Serviceman serviceman);
 

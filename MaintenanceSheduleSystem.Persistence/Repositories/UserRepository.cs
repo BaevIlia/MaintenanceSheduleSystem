@@ -19,19 +19,20 @@ namespace MaintenanceSheduleSystem.Persistence.Repositories
             _dbContext = dbContext;
         }
 
-        public async Task AddAdministrator(Administrator administratorEntity)
+        public async Task AddAdministrator(Administrator administrator)
         {
-            UserEntity userPart = new UserEntity()
+
+            AdministratorEntity administratorEntity = new AdministratorEntity()
             {
-                Id = administratorEntity.Id,
-                FullName = administratorEntity.FullName.ToString(),
-                Email = administratorEntity.Email,
-                HashedPassword = administratorEntity.HashedPassword,
+                Id = administrator.Id,
+                Email = administrator.Email,
+                HashedPassword = administrator.HashedPassword,
+                FullName = administrator.FullName.ToString(),
                 Role = Core.Enums.Roles.Admin,
                 IsSacked = false,
+                SigningKey = administrator.OwnAcceptKey
             };
-            _dbContext.Users.Add(userPart);
-          
+           await _dbContext.AddAsync(administratorEntity);
 
             await _dbContext.SaveChangesAsync();
         }

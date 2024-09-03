@@ -1,22 +1,21 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MaintenanceSheduleSystem.Core.Models;
-using MaintenanceSheduleSystem.Core.Interfaces;
+using MaintenanceSheduleSystem.Application.Services;
 namespace MaintenanceSheduleSystem.API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
     public class TestAPI : ControllerBase
     {
-        private readonly IUserService _userService;
+        private readonly UserService _userService;
 
-        public TestAPI(IUserService userService)
+        public TestAPI(UserService userService)
         {
             _userService = userService;
         }
         [HttpPost("createUser")]
-        public IActionResult UserCreate(string surname, string firstName, string lastName, string email, string password)
+        public async Task<IActionResult> UserCreate(string surname, string firstName, string lastName, string email, string password)
         {
-            _userService.AddAdmin(surname, firstName, lastName, email, password);
+           await _userService.AddAdministrator(surname, firstName, lastName, email, password);
 
             return Ok();
         }
