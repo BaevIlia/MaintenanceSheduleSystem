@@ -1,4 +1,5 @@
 ﻿using MaintenanceSheduleSystem.Application.Services;
+using MaintenanceSheduleSystem.Core.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MaintenanceSheduleSystem.API.Controllers
@@ -14,9 +15,11 @@ namespace MaintenanceSheduleSystem.API.Controllers
             _userBaseService = userBaseService; 
         }
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById() 
+        public async Task<IActionResult> GetById(string id) 
         {
-            var result = await _userBaseService
+            User result = await _userBaseService.GetById(Guid.Parse(id));
+
+            return Ok(result);
         }
         [HttpPost("login")]
         public async Task<IActionResult> Login(string email, string password) 

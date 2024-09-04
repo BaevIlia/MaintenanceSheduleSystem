@@ -16,7 +16,7 @@ namespace MaintenanceSheduleSystem.Persistence.Repositories
         }
         public async Task<User> GetByEmail(string email)
         {
-            UserEntity userEntity = await _context.Users.Where(u => u.Email.Equals(email)).FirstOrDefaultAsync();
+            UserEntity? userEntity = await _context.Users.Where(u => u.Email.Equals(email)).FirstOrDefaultAsync();
 
             User user = new(userEntity.Id, userEntity.Email, userEntity.HashedPassword, FullName.ParseFullName(userEntity.FullName), userEntity.Role);
 

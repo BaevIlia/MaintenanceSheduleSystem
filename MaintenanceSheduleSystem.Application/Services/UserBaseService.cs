@@ -30,11 +30,11 @@ namespace MaintenanceSheduleSystem.Application.Services
             return Guid.NewGuid().ToString();
         }
 
-        public async Task<string> GetById(Guid id) 
+        public async Task<User> GetById(Guid id) 
         {
             User user = await _userBaseRepository.GetById(id);
 
-            return user.Id.ToString();
+            return user;
         }
     }
 }
