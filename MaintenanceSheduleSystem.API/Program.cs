@@ -1,7 +1,6 @@
-using MaintenanceSheduleSystem.Core.Interfaces;
-using Microsoft.EntityFrameworkCore;
 using MaintenanceSheduleSystem.Persistence;
 using MaintenanceSheduleSystem.Application;
+using MaintenanceSheduleSystem.Infrastructure;
 namespace MaintenanceSheduleSystem.API
 {
     public class Program
@@ -18,6 +17,7 @@ namespace MaintenanceSheduleSystem.API
 
             builder.Services.AddPersistence(builder.Configuration);
             builder.Services.AddApplication();
+            builder.Services.AddInfrastructure();
 
 
             var app = builder.Build();
