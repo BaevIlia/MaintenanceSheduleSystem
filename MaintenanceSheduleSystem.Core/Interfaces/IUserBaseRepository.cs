@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace MaintenanceSheduleSystem.Core.Interfaces
 {
-    public interface IAdministratorRepository
+    public interface IUserBaseRepository
     {
-        Task<Guid> Create(Administrator administrator);
+        public Task<User> GetByEmail(string email);
     }
 }

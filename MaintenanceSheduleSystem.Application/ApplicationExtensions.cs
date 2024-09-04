@@ -12,8 +12,7 @@ namespace MaintenanceSheduleSystem.Application
     {
         public static IServiceCollection AddApplication(this IServiceCollection services) 
         {
-            services.AddScoped<AdministratorService>();
-
+            services.AddScoped<UserBaseService>();
             return services;
         }
     }

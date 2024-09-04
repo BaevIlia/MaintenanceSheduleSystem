@@ -23,7 +23,9 @@ namespace MaintenanceSheduleSystem.Persistence
             {
                 options.UseNpgsql(configuration.GetConnectionString("PostgreSQL"), b => b.MigrationsAssembly("MaintenanceSheduleSystem.Persistence"));
             });
-            services.AddScoped<IAdministratorRepository, AdministratorRepository>();
+
+            services.AddScoped<IUserBaseRepository, UserBaseRepository>();
+    
 
             return services;
         }

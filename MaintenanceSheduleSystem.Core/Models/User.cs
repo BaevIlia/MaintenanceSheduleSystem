@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace MaintenanceSheduleSystem.Core.Models
 {
-    public abstract class User
+    public class User
     {
-        protected User(Guid id, string email, string hashedPassword, FullName fullName, Roles role)
+        public User(Guid id, string email, string hashedPassword, FullName fullName, Roles role)
         {
             Id = id;
             Email = email;
@@ -23,6 +23,7 @@ namespace MaintenanceSheduleSystem.Core.Models
         public string HashedPassword { get; set; }= string.Empty;
         public Roles Role { get; set; }
         public FullName FullName { get; set; }
+
 
         
     }
