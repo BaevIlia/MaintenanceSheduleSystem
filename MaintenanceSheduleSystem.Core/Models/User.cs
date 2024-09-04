@@ -23,5 +23,7 @@ namespace MaintenanceSheduleSystem.Core.Models
         public string HashedPassword { get; set; }= string.Empty;
         public Roles Role { get; set; }
         public FullName FullName { get; set; }
+
+        
     }
 }

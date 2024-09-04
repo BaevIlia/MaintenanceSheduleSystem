@@ -22,5 +22,18 @@ namespace MaintenanceSheduleSystem.Core.Models
         {
             return $"{Surname} {FirstName} {LastName}";
         }
+
+        public static FullName ParseFullName(string fullName) 
+        {
+            string[] nameParts = fullName.Split(' ');
+            string surname = nameParts[0];
+            string firstName = nameParts[1];
+            string lastName = nameParts[2];
+
+
+            FullName result = new(surname, firstName, lastName);
+
+            return result;
+        }
     }
 }
