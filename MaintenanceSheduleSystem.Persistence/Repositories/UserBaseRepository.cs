@@ -2,11 +2,7 @@
 using MaintenanceSheduleSystem.Core.Models;
 using MaintenanceSheduleSystem.Persistence.Entities;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace MaintenanceSheduleSystem.Persistence.Repositories
 {
@@ -24,6 +20,14 @@ namespace MaintenanceSheduleSystem.Persistence.Repositories
 
             User user = new(userEntity.Id, userEntity.Email, userEntity.HashedPassword, FullName.ParseFullName(userEntity.FullName), userEntity.Role);
 
+
+            return user;
+        }
+        public async Task<User> GetById(Guid id) 
+        {
+            UserEntity userEntity = await _context.Users.FindAsync(id);
+
+            User user = new(userEntity.Id, userEntity.Email, userEntity.HashedPassword, FullName.ParseFullName(userEntity.FullName), userEntity.Role);
 
             return user;
         }

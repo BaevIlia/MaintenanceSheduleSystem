@@ -10,5 +10,6 @@ namespace MaintenanceSheduleSystem.Core.Interfaces
     public interface IUserBaseRepository
     {
         public Task<User> GetByEmail(string email);
+        public Task<User> GetById(Guid id);
     }
 }

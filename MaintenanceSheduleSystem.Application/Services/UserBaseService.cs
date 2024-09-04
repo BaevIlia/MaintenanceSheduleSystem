@@ -25,7 +25,16 @@ namespace MaintenanceSheduleSystem.Application.Services
 
             var result = _passwordHasher.Verify(password, user.HashedPassword);
 
-            return user.FullName.ToString();
+            
+
+            return Guid.NewGuid().ToString();
+        }
+
+        public async Task<string> GetById(Guid id) 
+        {
+            User user = await _userBaseRepository.GetById(id);
+
+            return user.Id.ToString();
         }
     }
 }

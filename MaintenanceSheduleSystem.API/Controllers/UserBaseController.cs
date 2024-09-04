@@ -16,7 +16,7 @@ namespace MaintenanceSheduleSystem.API.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById() 
         {
-            return Ok();
+            var result = await _userBaseService
         }
         [HttpPost("login")]
         public async Task<IActionResult> Login(string email, string password) 
