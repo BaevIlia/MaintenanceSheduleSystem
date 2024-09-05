@@ -11,6 +11,7 @@ namespace MaintenanceSheduleSystem.Core.Models
     {
         private PlannerEngineer(Guid id, string email, string hashedPassword, FullName fullName, Roles role, string title) : base(id, email, hashedPassword, fullName, role)
         {
+            Title = title;
         }
 
         public static PlannerEngineer Create(Guid id, string email, string hashedPassword, FullName fullName, string title) 
