@@ -15,7 +15,6 @@ namespace MaintenanceSheduleSystem.API.Controllers
         {
             _userBaseService = userBaseService; 
         }
-        [Authorize]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(string id) 
         {

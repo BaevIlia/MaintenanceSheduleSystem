@@ -27,7 +27,7 @@ namespace MaintenanceSheduleSystem.Infrastructure.LogicServices
         {
             Claim[] claims = [
                 new("userId", user.Id.ToString()),
-
+                new("role", user.Role.ToString())
             ];
             var singningCredentinals = new SigningCredentials(
                 new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_options.SecretKey)),

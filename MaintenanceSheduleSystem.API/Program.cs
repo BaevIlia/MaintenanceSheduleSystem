@@ -31,7 +31,8 @@ namespace MaintenanceSheduleSystem.API
             }
 
             // Configure the HTTP request pipeline.
-
+            app.UseAuthentication();
+            app.UseAuthorization();
             app.MapControllers();
 
             app.Run();
