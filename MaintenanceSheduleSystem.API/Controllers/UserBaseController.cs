@@ -47,10 +47,6 @@ namespace MaintenanceSheduleSystem.API.Controllers
             return Ok(result);
         }
 
-        [HttpGet("profile/{id}")]
-        public async Task<IActionResult> GetProfile(string id) 
-        {
-            
-        }
+        
     }
 }

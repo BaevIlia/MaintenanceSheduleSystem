@@ -30,5 +30,12 @@ namespace MaintenanceSheduleSystem.API.Controllers
             return Ok(result);
         }
 
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetProfile(string id) 
+        {
+            var result = await _administartorService.GetProfile(Guid.Parse(id));
+
+            return Ok(result);
+        }
     }
 }

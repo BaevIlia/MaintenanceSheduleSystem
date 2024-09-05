@@ -1,4 +1,5 @@
-﻿using MaintenanceSheduleSystem.Core.Interfaces;
+﻿using MaintenanceSheduleSystem.Core.Enums;
+using MaintenanceSheduleSystem.Core.Interfaces;
 using MaintenanceSheduleSystem.Core.Models;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ namespace MaintenanceSheduleSystem.Application.Services
     public class UserBaseService
     {
         private readonly IUserBaseRepository _userBaseRepository;
-        private readonly IPasswordHasher _passwordHasher; 
+        private readonly IPasswordHasher _passwordHasher;
         private readonly IJwtProviderService _jwtProviderService;
         public UserBaseService(IUserBaseRepository userBaseRepository, IPasswordHasher passwordHasher, IJwtProviderService jwtProviderService)
         {
@@ -20,7 +21,7 @@ namespace MaintenanceSheduleSystem.Application.Services
             _jwtProviderService = jwtProviderService;
         }
 
-        public async Task<string> Login(string email, string password) 
+        public async Task<string> Login(string email, string password)
         {
             User user = await _userBaseRepository.GetByEmail(email);
 
@@ -31,34 +32,36 @@ namespace MaintenanceSheduleSystem.Application.Services
             return token;
         }
 
-        public async Task<User> GetById(Guid id) 
+        public async Task<User> GetById(Guid id)
         {
             User user = await _userBaseRepository.GetById(id);
 
             return user;
         }
 
-        public async Task<bool> ChangePassword(Guid id, string newPassword) 
+        public async Task<bool> ChangePassword(Guid id, string newPassword)
         {
             User user = await _userBaseRepository.GetById(id);
 
-            if (user is null) 
+            if (user is null)
             {
                 throw new ArgumentNullException("Пользователя не существует");
             }
-            if (_passwordHasher.Verify(newPassword, user.HashedPassword)) 
+            if (_passwordHasher.Verify(newPassword, user.HashedPassword))
             {
                 throw new Exception("Пожалуйста, введите пароль, отличный от старого");
             }
             string newHashedPassword = _passwordHasher.Generate(newPassword);
 
-           var result = await _userBaseRepository.ChangePassword(user, newHashedPassword);
+            var result = await _userBaseRepository.ChangePassword(user, newHashedPassword);
 
-            if (!result) 
+            if (!result)
             {
                 throw new Exception("При изменении пароля произошла ошибка");
             }
             return result;
         }
+
+       
     }
 }

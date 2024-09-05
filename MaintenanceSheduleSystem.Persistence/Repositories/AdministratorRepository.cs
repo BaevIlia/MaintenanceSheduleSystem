@@ -52,6 +52,14 @@ namespace MaintenanceSheduleSystem.Persistence.Repositories
 
             
         }
+        public async Task<object> GetProfile(Guid id) 
+        {
+            AdministratorEntity entity = await _dbContext.Administrators.FindAsync(id);
+
+            Administrator profile = Administrator.Create(entity.Id, entity.Email, entity.HashedPassword, FullName.ParseFullName(entity.FullName), entity.SigningKey);
+
+            return profile;
+        }
 
         private bool CheckSignKey(Guid adminId, string signKey) 
         {

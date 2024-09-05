@@ -33,5 +33,11 @@ namespace MaintenanceSheduleSystem.Application.Services
             }
             return true;
         }
+        public async Task<object> GetProfile(Guid id) 
+        {
+            var result = await _administratorRepository.GetProfile(id);
+
+            return result;
+        }
     }
 }

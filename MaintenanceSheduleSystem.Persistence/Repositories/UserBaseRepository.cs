@@ -44,12 +44,8 @@ namespace MaintenanceSheduleSystem.Persistence.Repositories
 
             return user;
         }
-        public async Task<object> GetProfile(Guid id, Roles role) 
-        {
-            object result = role switch 
-            {
-                Roles.Admin => await _context.Administrators.FindAsync(id),
-            }
-        }
+     
+
+       
     }
 }
