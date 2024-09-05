@@ -65,7 +65,7 @@ namespace MaintenanceSheduleSystem.Persistence.Repositories
                     Email = serviceman.Email,
                     HashedPassword = serviceman.HashedPassword,
                     IsSacked = false,
-                    Role = Core.Enums.Roles.Planner,
+                    Role = Core.Enums.Roles.Service,
                 };
 
                 await _dbContext.Servicemen.AddAsync(entity);
