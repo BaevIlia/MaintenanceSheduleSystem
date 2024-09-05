@@ -5,6 +5,7 @@ using MaintenanceSheduleSystem.Persistence.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -19,7 +20,7 @@ namespace MaintenanceSheduleSystem.Persistence.Repositories
             _dbContext = dbContext;
         }
 
-        public async Task<bool> CreatePlanner(PlannerEngineer planner, Guid adminId, string signingKey) 
+        public async Task<bool> CreatePlanner(PlannerEngineer planner, Guid adminId, string signingKey)
         {
             if (CheckSignKey(adminId, signingKey))
             {
@@ -37,27 +38,53 @@ namespace MaintenanceSheduleSystem.Persistence.Repositories
                 await _dbContext.PlannerEngineers.AddAsync(plannerEngineerEntity);
                 await _dbContext.SaveChangesAsync();
 
-                if (!CheckIfExists(plannerEngineerEntity.Id)) 
+                if (!CheckIfExists(plannerEngineerEntity.Id))
                 {
                     throw new Exception("Ошибка записи в базу данных");
                 }
 
                 return true;
             }
-            else 
+            else
             {
                 throw new Exception("Ключ подписания не соответствует ключу подписания данной учётной записи администратора");
-                
+
             }
-           
 
-            
+
+
         }
-        public async Task<bool> CreateServiceman(Serviceman serviceman, Guid adminId, string signingKey) 
+        public async Task<bool> CreateServiceman(Serviceman serviceman, Guid adminId, string signingKey)
         {
+            if (CheckSignKey(adminId, signingKey))
+            {
+                ServicemanEntity entity = new()
+                {
+                    Id = serviceman.Id,
+                    FullName = serviceman.FullName.ToString(),
+                    Email = serviceman.Email,
+                    HashedPassword = serviceman.HashedPassword,
+                    IsSacked = false,
+                    Role = Core.Enums.Roles.Planner,
+                };
 
+                await _dbContext.Servicemen.AddAsync(entity);
+                await _dbContext.SaveChangesAsync();
+
+                if (!CheckIfExists(entity.Id))
+                {
+                    throw new Exception("Ошибка записи в базу данных");
+                }
+
+                return true;
+            }
+            else
+            {
+                throw new Exception("Ключ подписания не соответствует ключу подписания данной учётной записи администратора");
+
+            }
         }
-        public async Task<object> GetProfile(Guid id) 
+        public async Task<object> GetProfile(Guid id)
         {
             AdministratorEntity entity = await _dbContext.Administrators.FindAsync(id);
 
@@ -65,54 +92,78 @@ namespace MaintenanceSheduleSystem.Persistence.Repositories
 
             return profile;
         }
-        public async Task<bool> DeleteProfile(Guid id) 
+        public async Task<bool> DeleteProfile(Guid id)
         {
             UserEntity user = await _dbContext.Users.FindAsync(id);
 
             user.IsSacked = true;
 
-            await _dbContext.SaveChangesAsync(); 
+            await _dbContext.SaveChangesAsync();
 
             return true;
         }
 
-        public async Task<bool> UpdateProfile(Guid id, string surname, string firstName, string lastName, string email, string hashedPassword, Roles role) 
+        public async Task<bool> UpdateAdministrator(Guid id, string surname, string firstName, string lastName, string email, Guid adminId, string signingKey)
         {
-           
-            switch (role)
+            if (CheckSignKey(adminId, signingKey))
             {
-                case Roles.Admin: 
-                    {
-                        AdministratorEntity entity = await _dbContext.Administrators.FindAsync(id);
-                        entity.FullName = new FullName(surname, firstName, lastName).ToString();
-                        entity.Email = email;
-                        entity.Role = role;
+                AdministratorEntity entity = await _dbContext.Administrators.FindAsync(id);
 
-                    }
-                    break;
-                case Roles.Planner: 
-                    {
-                        PlannerEngineerEntity entity = await _dbContext.PlannerEngineers.FindAsync(id);
-                        entity.FullName = new FullName(surname, firstName, lastName).ToString();
-                        entity.Email = email;
-                        entity.Role = role;
-                    }
-                    break;
-                case Roles.Service:  
-                    {
-                        ServicemanEntity entity = await _dbContext.Servicemen.FindAsync(id);
-                        entity.FullName = new FullName(surname, firstName, lastName).ToString();
-                        entity.Email = email;
-                        entity.Role = role;
-                    }
-                    break;
-                default:
-                    throw new Exception("Такой роли не существует");
+                entity.FullName = new FullName(surname, firstName, lastName).ToString();
+                entity.Email = email;
+
+                await _dbContext.SaveChangesAsync();
+
+                return true;
+            }
+            else
+            {
+                throw new Exception("Ключ подписания не соответствует ключу подписания данной учётной записи администратора");
             }
 
-            return true;
+
         }
-        private bool CheckSignKey(Guid adminId, string signKey) 
+        public async Task<bool> UpdatePlannerEngineer(Guid id, string surname, string firstName, string lastName, string email, string title, Guid adminId, string signingKey)
+        {
+            if (CheckSignKey(adminId, signingKey))
+            {
+                PlannerEngineerEntity entity = await _dbContext.PlannerEngineers.FindAsync(id);
+
+                entity.FullName = new FullName(surname, firstName, lastName).ToString();
+                entity.Email = email;
+                entity.Title = title;
+
+                await _dbContext.SaveChangesAsync();
+
+                return true;
+
+            }
+            else
+            {
+                throw new Exception("Ключ подписания не соответствует ключу подписания данной учётной записи администратора");
+            }
+        }
+        public async Task<bool> UpdateServiceman(Guid id, string surname, string firstName, string lastName, string email, Guid adminId, string signingKey)
+        {
+            if (CheckSignKey(adminId, signingKey))
+            {
+
+                ServicemanEntity entity = await _dbContext.Servicemen.FindAsync(id);
+                entity.FullName = new FullName(surname, firstName, lastName).ToString();
+                entity.Email = email;
+
+
+                await _dbContext.SaveChangesAsync();
+
+                return true;
+
+            }
+            else 
+            {
+                throw new Exception("Ключ подписания не соответствует ключу подписания данной учётной записи администратора");
+            }
+        }
+        private bool CheckSignKey(Guid adminId, string signKey)
         {
             var admin = _dbContext.Administrators.Find(adminId);
 
@@ -122,10 +173,10 @@ namespace MaintenanceSheduleSystem.Persistence.Repositories
             }
             return true;
         }
-        private bool CheckIfExists(Guid id) 
+        private bool CheckIfExists(Guid id)
         {
             var result = _dbContext.Users.Find(id);
-            if (result is null) 
+            if (result is null)
             {
                 return false;
             }

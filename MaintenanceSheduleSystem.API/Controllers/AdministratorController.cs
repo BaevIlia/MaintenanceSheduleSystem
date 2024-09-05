@@ -44,11 +44,7 @@ namespace MaintenanceSheduleSystem.API.Controllers
             return Ok(result);
         }
 
-        [HttpPut("udpateProfile")]
-        public async Task<IActionResult> UpdateProfile(string profileId,string surname, string firstName, string lastName, string email, Roles role) 
-        {
-
-        }
+        
 
         [HttpPatch("deleteProfile")]
         public async Task<IActionResult> DeleteProfile(string id) 
