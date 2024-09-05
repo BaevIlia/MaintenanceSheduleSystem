@@ -13,17 +13,17 @@ namespace MaintenanceSheduleSystem.API.Controllers
 
         public UserBaseController(UserBaseService userBaseService)
         {
-            _userBaseService = userBaseService; 
+            _userBaseService = userBaseService;
         }
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(string id) 
+        public async Task<IActionResult> GetById(string id)
         {
             User result = await _userBaseService.GetById(Guid.Parse(id));
 
             return Ok(result);
         }
         [HttpPost("login")]
-        public async Task<IActionResult> Login(string email, string password) 
+        public async Task<IActionResult> Login(string email, string password)
         {
             var result = await _userBaseService.Login(email, password);
             HttpContext.Response.Cookies.Append("myCookies", result);
@@ -32,10 +32,12 @@ namespace MaintenanceSheduleSystem.API.Controllers
         }
 
         [HttpPost("logout")]
-        public void Logout() 
+        public void Logout()
         {
             HttpContext.Response.Cookies.Delete("myCookies");
-            
+
         }
+
+        
     }
 }
