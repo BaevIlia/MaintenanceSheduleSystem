@@ -1,4 +1,5 @@
-﻿using MaintenanceSheduleSystem.Core.Interfaces;
+﻿using MaintenanceSheduleSystem.Core.Enums;
+using MaintenanceSheduleSystem.Core.Interfaces;
 using MaintenanceSheduleSystem.Core.Models;
 using MaintenanceSheduleSystem.Persistence.Entities;
 using System;
@@ -36,7 +37,7 @@ namespace MaintenanceSheduleSystem.Persistence.Repositories
                 await _dbContext.PlannerEngineers.AddAsync(plannerEngineerEntity);
                 await _dbContext.SaveChangesAsync();
 
-                if (!ChechIfExists(plannerEngineerEntity.Id)) 
+                if (!CheckIfExists(plannerEngineerEntity.Id)) 
                 {
                     throw new Exception("Ошибка записи в базу данных");
                 }
@@ -52,6 +53,10 @@ namespace MaintenanceSheduleSystem.Persistence.Repositories
 
             
         }
+        public async Task<bool> CreateServiceman(Serviceman serviceman, Guid adminId, string signingKey) 
+        {
+
+        }
         public async Task<object> GetProfile(Guid id) 
         {
             AdministratorEntity entity = await _dbContext.Administrators.FindAsync(id);
@@ -60,7 +65,53 @@ namespace MaintenanceSheduleSystem.Persistence.Repositories
 
             return profile;
         }
+        public async Task<bool> DeleteProfile(Guid id) 
+        {
+            UserEntity user = await _dbContext.Users.FindAsync(id);
 
+            user.IsSacked = true;
+
+            await _dbContext.SaveChangesAsync(); 
+
+            return true;
+        }
+
+        public async Task<bool> UpdateProfile(Guid id, string surname, string firstName, string lastName, string email, string hashedPassword, Roles role) 
+        {
+           
+            switch (role)
+            {
+                case Roles.Admin: 
+                    {
+                        AdministratorEntity entity = await _dbContext.Administrators.FindAsync(id);
+                        entity.FullName = new FullName(surname, firstName, lastName).ToString();
+                        entity.Email = email;
+                        entity.Role = role;
+
+                    }
+                    break;
+                case Roles.Planner: 
+                    {
+                        PlannerEngineerEntity entity = await _dbContext.PlannerEngineers.FindAsync(id);
+                        entity.FullName = new FullName(surname, firstName, lastName).ToString();
+                        entity.Email = email;
+                        entity.Role = role;
+                    }
+                    break;
+                case Roles.Service:  
+                    {
+                        ServicemanEntity entity = await _dbContext.Servicemen.FindAsync(id);
+                        entity.FullName = new FullName(surname, firstName, lastName).ToString();
+                        entity.Email = email;
+                        entity.Role = role;
+                    }
+                    break;
+                default:
+                    throw new Exception("Такой роли не существует");
+            }
+
+            return true;
+        }
         private bool CheckSignKey(Guid adminId, string signKey) 
         {
             var admin = _dbContext.Administrators.Find(adminId);
@@ -71,7 +122,7 @@ namespace MaintenanceSheduleSystem.Persistence.Repositories
             }
             return true;
         }
-        private bool ChechIfExists(Guid id) 
+        private bool CheckIfExists(Guid id) 
         {
             var result = _dbContext.Users.Find(id);
             if (result is null) 
