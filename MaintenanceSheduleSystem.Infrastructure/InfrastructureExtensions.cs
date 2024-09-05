@@ -14,6 +14,7 @@ namespace MaintenanceSheduleSystem.Infrastructure
         public static IServiceCollection AddInfrastructure(this IServiceCollection services) 
         {
             services.AddScoped<IPasswordHasher, PasswordHasher>();
+            services.AddScoped<IJwtProviderService, JwtProviderService>();
 
             return services;
         }

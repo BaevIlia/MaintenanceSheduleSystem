@@ -1,5 +1,6 @@
 ﻿using MaintenanceSheduleSystem.Application.Services;
 using MaintenanceSheduleSystem.Core.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MaintenanceSheduleSystem.API.Controllers
@@ -14,6 +15,7 @@ namespace MaintenanceSheduleSystem.API.Controllers
         {
             _userBaseService = userBaseService; 
         }
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(string id) 
         {
@@ -25,8 +27,16 @@ namespace MaintenanceSheduleSystem.API.Controllers
         public async Task<IActionResult> Login(string email, string password) 
         {
             var result = await _userBaseService.Login(email, password);
+            HttpContext.Response.Cookies.Append("myCookies", result);
 
             return Ok(result);
+        }
+
+        [HttpPost("logout")]
+        public void Logout() 
+        {
+            HttpContext.Response.Cookies.Delete("myCookies");
+            
         }
     }
 }

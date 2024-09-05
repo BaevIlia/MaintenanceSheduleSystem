@@ -12,11 +12,12 @@ namespace MaintenanceSheduleSystem.Application.Services
     {
         private readonly IUserBaseRepository _userBaseRepository;
         private readonly IPasswordHasher _passwordHasher; 
-        
-        public UserBaseService(IUserBaseRepository userBaseRepository, IPasswordHasher passwordHasher)
+        private readonly IJwtProviderService _jwtProviderService;
+        public UserBaseService(IUserBaseRepository userBaseRepository, IPasswordHasher passwordHasher, IJwtProviderService jwtProviderService)
         {
             _userBaseRepository = userBaseRepository;
             _passwordHasher = passwordHasher;
+            _jwtProviderService = jwtProviderService;
         }
 
         public async Task<string> Login(string email, string password) 
@@ -25,9 +26,9 @@ namespace MaintenanceSheduleSystem.Application.Services
 
             var result = _passwordHasher.Verify(password, user.HashedPassword);
 
-            
+            var token = _jwtProviderService.GenerateToken(user);
 
-            return Guid.NewGuid().ToString();
+            return token;
         }
 
         public async Task<User> GetById(Guid id) 
