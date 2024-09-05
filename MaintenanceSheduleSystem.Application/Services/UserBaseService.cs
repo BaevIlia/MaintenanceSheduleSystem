@@ -37,5 +37,28 @@ namespace MaintenanceSheduleSystem.Application.Services
 
             return user;
         }
+
+        public async Task<bool> ChangePassword(Guid id, string newPassword) 
+        {
+            User user = await _userBaseRepository.GetById(id);
+
+            if (user is null) 
+            {
+                throw new ArgumentNullException("Пользователя не существует");
+            }
+            if (_passwordHasher.Verify(newPassword, user.HashedPassword)) 
+            {
+                throw new Exception("Пожалуйста, введите пароль, отличный от старого");
+            }
+            string newHashedPassword = _passwordHasher.Generate(newPassword);
+
+           var result = await _userBaseRepository.ChangePassword(user, newHashedPassword);
+
+            if (!result) 
+            {
+                throw new Exception("При изменении пароля произошла ошибка");
+            }
+            return result;
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using MaintenanceSheduleSystem.Core.Interfaces;
+﻿using MaintenanceSheduleSystem.Core.Enums;
+using MaintenanceSheduleSystem.Core.Interfaces;
 using MaintenanceSheduleSystem.Core.Models;
 using MaintenanceSheduleSystem.Persistence.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -14,6 +15,18 @@ namespace MaintenanceSheduleSystem.Persistence.Repositories
         {
             _context = context;
         }
+
+        public async Task<bool> ChangePassword(User user,  string newHashedPassword)
+        {
+            if (user is null) 
+            {
+                throw new ArgumentNullException("Пользователя не существует");
+            }
+            user.HashedPassword = newHashedPassword;
+            await _context.SaveChangesAsync();
+            return true;
+        }
+
         public async Task<User> GetByEmail(string email)
         {
             UserEntity? userEntity = await _context.Users.Where(u => u.Email.Equals(email)).FirstOrDefaultAsync();
@@ -30,6 +43,13 @@ namespace MaintenanceSheduleSystem.Persistence.Repositories
             User user = new(userEntity.Id, userEntity.Email, userEntity.HashedPassword, FullName.ParseFullName(userEntity.FullName), userEntity.Role);
 
             return user;
+        }
+        public async Task<object> GetProfile(Guid id, Roles role) 
+        {
+            object result = role switch 
+            {
+                Roles.Admin => await _context.Administrators.FindAsync(id),
+            }
         }
     }
 }

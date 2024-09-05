@@ -11,5 +11,6 @@ namespace MaintenanceSheduleSystem.Core.Interfaces
     {
         public Task<User> GetByEmail(string email);
         public Task<User> GetById(Guid id);
+        public Task<bool> ChangePassword(User user, string newHashedPassword);
     }
 }

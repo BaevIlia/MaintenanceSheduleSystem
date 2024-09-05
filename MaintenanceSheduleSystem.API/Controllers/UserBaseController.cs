@@ -15,6 +15,7 @@ namespace MaintenanceSheduleSystem.API.Controllers
         {
             _userBaseService = userBaseService;
         }
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(string id)
         {
@@ -30,14 +31,26 @@ namespace MaintenanceSheduleSystem.API.Controllers
 
             return Ok(result);
         }
-
+        [Authorize]
         [HttpPost("logout")]
         public void Logout()
         {
             HttpContext.Response.Cookies.Delete("myCookies");
 
         }
+        [Authorize]
+        [HttpPatch("changePassword")]
+        public async Task<IActionResult> ChangePassword(string userId, string newPassword) 
+        {
+            var result = await _userBaseService.ChangePassword(Guid.Parse(userId), newPassword);
 
-        
+            return Ok(result);
+        }
+
+        [HttpGet("profile/{id}")]
+        public async Task<IActionResult> GetProfile(string id) 
+        {
+            
+        }
     }
 }
