@@ -2,6 +2,7 @@
 using MaintenanceSheduleSystem.Core.Interfaces;
 using MaintenanceSheduleSystem.Core.Models;
 using MaintenanceSheduleSystem.Persistence.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -114,6 +115,13 @@ namespace MaintenanceSheduleSystem.Persistence.Repositories
 
                 await _dbContext.SaveChangesAsync();
 
+                await _dbContext.Administrators
+                    .Where(a => a.Id.Equals(id))
+                    .ExecuteUpdateAsync(a => a
+                    .SetProperty(a => a.FullName, new FullName(surname, firstName, lastName).ToString())
+                    .SetProperty(a => a.Email, email)
+                    );
+
                 return true;
             }
             else
@@ -129,11 +137,14 @@ namespace MaintenanceSheduleSystem.Persistence.Repositories
             {
                 PlannerEngineerEntity entity = await _dbContext.PlannerEngineers.FindAsync(id);
 
-                entity.FullName = new FullName(surname, firstName, lastName).ToString();
-                entity.Email = email;
-                entity.Title = title;
+                await _dbContext.PlannerEngineers
+                    .Where(p => p.Id.Equals(id))
+                    .ExecuteUpdateAsync(p => p
+                    .SetProperty(p => p.FullName, new FullName(surname, firstName, lastName).ToString())
+                    .SetProperty(p => p.Email, email)
+                    .SetProperty(p => p.Title, title)
+                    );
 
-                await _dbContext.SaveChangesAsync();
 
                 return true;
 
@@ -149,12 +160,13 @@ namespace MaintenanceSheduleSystem.Persistence.Repositories
             {
 
                 ServicemanEntity entity = await _dbContext.Servicemen.FindAsync(id);
-                entity.FullName = new FullName(surname, firstName, lastName).ToString();
-                entity.Email = email;
-
-
                 await _dbContext.SaveChangesAsync();
-
+                await _dbContext.Servicemen
+                    .Where(s => s.Id.Equals(id))
+                    .ExecuteUpdateAsync(s => s
+                    .SetProperty(p => p.FullName, new FullName(surname, firstName, lastName).ToString())
+                    .SetProperty(p => p.Email, email)
+                    );
                 return true;
 
             }
