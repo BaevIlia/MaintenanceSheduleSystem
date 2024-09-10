@@ -15,6 +15,6 @@ namespace MaintenanceSheduleSystem.Persistence.Entities
         public Guid HandbookId { get; set; }
         public MachineEntity? Machine { get; set; }
         public ICollection<OrderEntity>? Orders { get; set; }
-        public ICollection<HandbookEntity>? Handbooks { get; set; }
+        public ICollection<InstructionEntity>? Handbooks { get; set; }
     }
 }

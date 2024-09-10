@@ -5,20 +5,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MaintenanceSheduleSystem.Core.Models
+namespace MaintenanceSheduleSystem.Persistence.Entities
 {
-    public class Handbook
+    public class InstructionEntity
     {
-        private Handbook()
-        {
-            
-        }
-
         public Guid Id { get; set; }
-        public Guid MachineId { get; set; }
         public Guid AreaId { get; set; }
         public TypeOfWork TypeOfWork { get; set; }
-        public string Description { get; set; }
+        public string Instructions { get; set; } = string.Empty;
         public Guid EquipmentListId { get; set; }
+
+        public MachineAreaEntity? MachineArea { get; set; }
+        public ICollection<EquipmentEntity>? Equipments { get; set; }
+  
     }
 }

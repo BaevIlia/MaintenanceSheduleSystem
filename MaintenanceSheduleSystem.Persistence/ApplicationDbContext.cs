@@ -23,11 +23,11 @@ namespace MaintenanceSheduleSystem.Persistence
         public DbSet<PlannerEngineerEntity> PlannerEngineers { get; set; }
         public DbSet<ServicemanEntity> Servicemen { get; set; }
         public DbSet<EquipmentEntity> Equipments { get; set; }
-        public DbSet<HandbookEntity> Handbooks { get; set; }
+        public DbSet<InstructionEntity> Handbooks { get; set; }
         public DbSet<MachineEntity> Machines { get; set; }
         public DbSet<OrderEntity> Orders { get; set; }
         public DbSet<MachineAreaEntity> MachineAreas { get; set; }
-        public DbSet<HandbookEquipmentEntity> HandbookEquipment { get; set; }
+        public DbSet<InstructionEquipmentEntity> HandbookEquipment { get; set; }
         public DbSet<OrderEquipmentEntity> OrderEquipment { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

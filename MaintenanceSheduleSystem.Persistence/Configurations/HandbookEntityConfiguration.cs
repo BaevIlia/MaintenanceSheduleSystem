@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace MaintenanceSheduleSystem.Persistence.Configurations
 {
-    public class HandbookEntityConfiguration : IEntityTypeConfiguration<HandbookEntity>
+    public class HandbookEntityConfiguration : IEntityTypeConfiguration<InstructionEntity>
     {
-        public void Configure(EntityTypeBuilder<HandbookEntity> builder)
+        public void Configure(EntityTypeBuilder<InstructionEntity> builder)
         {
             builder.HasKey(h => h.Id);
 
@@ -21,7 +21,7 @@ namespace MaintenanceSheduleSystem.Persistence.Configurations
 
             builder.HasMany(h => h.Equipments)
                 .WithMany(eq => eq.Handbooks)
-                .UsingEntity<HandbookEquipmentEntity>();
+                .UsingEntity<InstructionEquipmentEntity>();
             
         }
     }
