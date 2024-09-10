@@ -24,6 +24,7 @@ namespace MaintenanceSheduleSystem.Application.Services
 
         public async Task<string> Login(string email, string password)
         {
+           
             User user = await _userBaseRepository.GetByEmail(email);
 
             var result = _passwordHasher.Verify(password, user.HashedPassword);

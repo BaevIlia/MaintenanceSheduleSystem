@@ -34,6 +34,10 @@ namespace MaintenanceSheduleSystem.API.Controllers
             {
                 return BadRequest("Логин или пароль пуст");
             }
+            if (!email.EndsWith("@domain.ru")) 
+            {
+                return BadRequest("Почта с таким доменом недопустима");
+            }
             string token = await _userBaseService.Login(email, password);
             HttpContext.Response.Cookies.Append("myCookies", token);
 
