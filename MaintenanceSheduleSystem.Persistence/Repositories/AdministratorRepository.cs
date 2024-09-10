@@ -104,10 +104,9 @@ namespace MaintenanceSheduleSystem.Persistence.Repositories
             return true;
         }
 
-        public async Task<bool> UpdateAdministrator(Guid id, string surname, string firstName, string lastName, string email, Guid adminId, string signingKey)
+        public async Task<bool> UpdateAdministrator(Guid id, string surname, string firstName, string lastName, string email)
         {
-            if (CheckSignKey(adminId, signingKey))
-            {
+          
                 AdministratorEntity entity = await _dbContext.Administrators.FindAsync(id);
 
                 entity.FullName = new FullName(surname, firstName, lastName).ToString();
@@ -122,12 +121,9 @@ namespace MaintenanceSheduleSystem.Persistence.Repositories
                     .SetProperty(a => a.Email, email)
                     );
 
-                return true;
-            }
-            else
-            {
-                throw new Exception("Ключ подписания не соответствует ключу подписания данной учётной записи администратора");
-            }
+                
+            
+            return true;
 
 
         }

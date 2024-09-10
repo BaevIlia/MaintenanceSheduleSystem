@@ -16,10 +16,10 @@ namespace MaintenanceSheduleSystem.Persistence.Configurations
             builder.HasKey(ma => ma.Id);
 
             builder.HasOne(m => m.Machine)
-                .WithMany(ma => ma.Areas)
+                .WithMany(ma => ma.MachineAreas)
                 .HasForeignKey(ma => ma.MachineId);
 
-            builder.HasMany(ma => ma.Handbooks)
+            builder.HasMany(ma => ma.Instructions)
                 .WithOne(h => h.MachineArea);
 
             builder.HasMany(ma => ma.Orders)

@@ -9,14 +9,14 @@ using System.Threading.Tasks;
 
 namespace MaintenanceSheduleSystem.Persistence.Configurations
 {
-    public class HandbookEntityConfiguration : IEntityTypeConfiguration<InstructionEntity>
+    public class InstructionEntityConfiguration : IEntityTypeConfiguration<InstructionEntity>
     {
         public void Configure(EntityTypeBuilder<InstructionEntity> builder)
         {
             builder.HasKey(h => h.Id);
 
             builder.HasOne(h => h.MachineArea)
-                .WithMany(ma => ma.Handbooks)
+                .WithMany(ma => ma.Instructions)
                 .HasForeignKey(h => h.AreaId);
 
             builder.HasMany(h => h.Equipments)

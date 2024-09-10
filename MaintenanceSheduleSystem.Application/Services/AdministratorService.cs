@@ -47,9 +47,9 @@ namespace MaintenanceSheduleSystem.Application.Services
             return true;
         }
 
-        public async Task<bool> UpdateAdminProfile(Guid adminId, string signingKey,Guid id, string surname, string firstName, string lastName, string email) 
+        public async Task<bool> UpdateAdminProfile(Guid id, string surname, string firstName, string lastName, string email) 
         {
-            var result = await _administratorRepository.UpdateAdministrator(id, surname, firstName, lastName, email, adminId, signingKey);
+            var result = await _administratorRepository.UpdateAdministrator(id, surname, firstName, lastName, email);
 
             return result;
         }

@@ -12,7 +12,7 @@ namespace MaintenanceSheduleSystem.Core.Models
         private Order(Guid id, Guid areaId, string name, string description, DateTime createDate, DateTime deadlineDate, TypeOfWork typeOfWork, List<Equipment> equipments)
         {
             Id = id;
-            AreaId = areaId;
+            MachineAreaId = areaId;
             Name = name;
             Description = description;
             CreateDate = createDate;

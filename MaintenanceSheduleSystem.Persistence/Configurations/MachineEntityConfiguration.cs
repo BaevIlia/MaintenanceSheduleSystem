@@ -15,7 +15,7 @@ namespace MaintenanceSheduleSystem.Persistence.Configurations
         {
             builder.HasKey(m => m.Id);
 
-            builder.HasMany(m => m.Areas)
+            builder.HasMany(m => m.MachineAreas)
                 .WithOne(a => a.Machine);
                 
         }

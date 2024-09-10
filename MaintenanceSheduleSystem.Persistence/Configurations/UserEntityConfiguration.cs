@@ -15,6 +15,7 @@ namespace MaintenanceSheduleSystem.Persistence.Configurations
         {
             builder.HasKey(u => u.Id);
 
+           
         }
     }
 }

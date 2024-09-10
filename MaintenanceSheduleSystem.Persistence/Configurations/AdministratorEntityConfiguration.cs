@@ -1,0 +1,30 @@
+﻿using MaintenanceSheduleSystem.Persistence.Entities;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace MaintenanceSheduleSystem.Persistence.Configurations
+{
+    public class AdministratorEntityConfiguration : IEntityTypeConfiguration<AdministratorEntity>
+    {
+        public void Configure(EntityTypeBuilder<AdministratorEntity> builder)
+        {
+            builder.HasData(
+                new AdministratorEntity() 
+                {
+                    Id = Guid.NewGuid(),
+                    FullName = "admin",
+                    Email = "test@domain.ru",
+                    HashedPassword = "",
+                    IsSacked = false,
+                    Role = Core.Enums.Roles.Admin,
+                    SigningKey = string.Empty,
+                    
+                });
+        }
+    }
+}

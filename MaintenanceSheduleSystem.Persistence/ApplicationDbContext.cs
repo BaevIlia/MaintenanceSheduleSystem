@@ -33,7 +33,7 @@ namespace MaintenanceSheduleSystem.Persistence
         {
      
             modelBuilder.ApplyConfiguration(new EquipmentEntityConfiguration());
-            modelBuilder.ApplyConfiguration(new HandbookEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new InstructionEntityConfiguration());
             modelBuilder.ApplyConfiguration(new MachineAreaEntityConfiguration());
             modelBuilder.ApplyConfiguration(new MachineEntityConfiguration());
             modelBuilder.ApplyConfiguration(new OrderEntityConfiguration());
