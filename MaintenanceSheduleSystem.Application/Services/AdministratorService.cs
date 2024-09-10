@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace MaintenanceSheduleSystem.Application.Services
 {
-    public class AdministartorService
+    public class AdministratorService
     {
         private readonly IAdministratorRepository _administratorRepository;
         private readonly IPasswordHasher _passwordHasher;
 
-        public AdministartorService(IAdministratorRepository administratorRepository, IPasswordHasher passwordHasher)
+        public AdministratorService(IAdministratorRepository administratorRepository, IPasswordHasher passwordHasher)
         {
             _administratorRepository = administratorRepository;
             _passwordHasher = passwordHasher;

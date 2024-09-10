@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MaintenanceSheduleSystem.Persistence.Entities
 {
-    [Table("Administartors")]
+    [Table("Administrators")]
     public class AdministratorEntity : UserEntity
     {
         public string SigningKey { get; set; } = string.Empty;

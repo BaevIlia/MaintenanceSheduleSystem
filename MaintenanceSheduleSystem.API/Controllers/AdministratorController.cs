@@ -10,8 +10,8 @@ namespace MaintenanceSheduleSystem.API.Controllers
     [Authorize(Roles = "Admin")]
     public class AdministratorController : ControllerBase
     {
-        private readonly AdministartorService _administartorService;
-        public AdministratorController(AdministartorService administartorService)
+        private readonly AdministratorService _administartorService;
+        public AdministratorController(AdministratorService administartorService)
         {
             _administartorService = administartorService;
         }
