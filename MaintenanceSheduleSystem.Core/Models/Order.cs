@@ -22,7 +22,7 @@ namespace MaintenanceSheduleSystem.Core.Models
         }
         public Guid Id { get; set; }
         public Guid MachineId { get; set; }
-        public Guid AreaId { get; set; }
+        public Guid MachineAreaId { get; set; }
         public string Name { get; set; }= string.Empty;
         public string Description { get; set; } = string.Empty;
         public DateTime CreateDate { get; set; }
