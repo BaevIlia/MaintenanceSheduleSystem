@@ -17,6 +17,7 @@ namespace MaintenanceSheduleSystem.Core.Interfaces
         Task<bool> UpdatePlannerEngineer(Guid id, string surname, string firstName, string lastName, string email, string title, Guid adminId, string signingKey);
         Task<bool> UpdateServiceman(Guid id, string surname, string firstName, string lastName, string email, Guid adminId, string signingKey);
         Task<bool> DeleteProfile(Guid id);
+        Task<bool> CreateKey(Guid id, string key);
 
 
     }

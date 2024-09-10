@@ -109,11 +109,6 @@ namespace MaintenanceSheduleSystem.Persistence.Repositories
           
                 AdministratorEntity entity = await _dbContext.Administrators.FindAsync(id);
 
-                entity.FullName = new FullName(surname, firstName, lastName).ToString();
-                entity.Email = email;
-
-                await _dbContext.SaveChangesAsync();
-
                 await _dbContext.Administrators
                     .Where(a => a.Id.Equals(id))
                     .ExecuteUpdateAsync(a => a
@@ -156,7 +151,6 @@ namespace MaintenanceSheduleSystem.Persistence.Repositories
             {
 
                 ServicemanEntity entity = await _dbContext.Servicemen.FindAsync(id);
-                await _dbContext.SaveChangesAsync();
                 await _dbContext.Servicemen
                     .Where(s => s.Id.Equals(id))
                     .ExecuteUpdateAsync(s => s
@@ -170,6 +164,17 @@ namespace MaintenanceSheduleSystem.Persistence.Repositories
             {
                 throw new Exception("Ключ подписания не соответствует ключу подписания данной учётной записи администратора");
             }
+        }
+
+        public async Task<bool> CreateKey(Guid id, string key) 
+        {
+            await _dbContext.Administrators
+                .Where(a => a.Id.Equals(id))
+                .ExecuteUpdateAsync(a => a
+                .SetProperty(a => a.SigningKey, key)
+                );
+
+            return true;
         }
         private bool CheckSignKey(Guid adminId, string signKey)
         {

@@ -78,5 +78,16 @@ namespace MaintenanceSheduleSystem.Application.Services
 
             return result;
         }
+
+        public async Task<Guid> CreateSigningKey(Guid id) 
+        {
+            Guid signingKey = Guid.NewGuid();
+            var result = await _administratorRepository.CreateKey(id, signingKey.ToString());
+            if (!result) 
+            {
+                throw new Exception("Ошибка записи ключа в БД");
+            }
+            return signingKey;
+        }
     }
 }

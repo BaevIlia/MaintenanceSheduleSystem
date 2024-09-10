@@ -39,6 +39,12 @@ namespace MaintenanceSheduleSystem.Application.Services
 
             return user;
         }
+        public async Task<User> GetByEmail(string email) 
+        {
+            User user = await _userBaseRepository.GetByEmail(email);
+
+            return user;
+        }
 
         public async Task<bool> ChangePassword(Guid id, string newPassword)
         {

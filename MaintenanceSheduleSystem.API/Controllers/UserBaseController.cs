@@ -26,9 +26,10 @@ namespace MaintenanceSheduleSystem.API.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login(string email, string password)
         {           
-            var result = await _userBaseService.Login(email, password);
-            HttpContext.Response.Cookies.Append("myCookies", result);
+            string token = await _userBaseService.Login(email, password);
+            HttpContext.Response.Cookies.Append("myCookies", token);
 
+            var result = await _userBaseService.GetByEmail(email);
             return Ok(result);
         }
         [Authorize]
@@ -46,6 +47,7 @@ namespace MaintenanceSheduleSystem.API.Controllers
 
             return Ok(result);
         }
+        
 
         
     }

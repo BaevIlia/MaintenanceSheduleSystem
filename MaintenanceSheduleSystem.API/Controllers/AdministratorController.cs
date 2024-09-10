@@ -11,9 +11,11 @@ namespace MaintenanceSheduleSystem.API.Controllers
     public class AdministratorController : ControllerBase
     {
         private readonly AdministratorService _administratorService;
-        public AdministratorController(AdministratorService administartorService)
+        
+        public AdministratorController(AdministratorService administartorService) 
         {
             _administratorService = administartorService;
+         
         }
         [HttpPost("createPlanner")]
         public async Task<IActionResult> CreatePlanner(string adminId, string surname, string firstName, string lastName, string email, string password, string title, string signingKey) 
@@ -72,6 +74,14 @@ namespace MaintenanceSheduleSystem.API.Controllers
         public async Task<IActionResult> DeleteProfile(string id) 
         {
             var result = await _administratorService.DeleteProfile(Guid.Parse(id));
+
+            return Ok(result);
+        }
+
+        [HttpPost("createSigningKey")]
+        public async Task<IActionResult> CreateSigningKey(string id) 
+        {
+           var result = await _administratorService.CreateSigningKey(Guid.Parse(id));
 
             return Ok(result);
         }

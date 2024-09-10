@@ -1,4 +1,5 @@
-﻿using MaintenanceSheduleSystem.Persistence.Entities;
+﻿using BCrypt.Net;
+using MaintenanceSheduleSystem.Persistence.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
@@ -19,7 +20,7 @@ namespace MaintenanceSheduleSystem.Persistence.Configurations
                     Id = Guid.NewGuid(),
                     FullName = "admin",
                     Email = "test@domain.ru",
-                    HashedPassword = "",
+                    HashedPassword = BCrypt.Net.BCrypt.EnhancedHashPassword("1234"),
                     IsSacked = false,
                     Role = Core.Enums.Roles.Admin,
                     SigningKey = string.Empty,
