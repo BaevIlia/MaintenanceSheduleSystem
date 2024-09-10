@@ -39,6 +39,8 @@ namespace MaintenanceSheduleSystem.Persistence
             modelBuilder.ApplyConfiguration(new OrderEntityConfiguration());
             modelBuilder.ApplyConfiguration(new ServicemanEntityConfiguration());
             modelBuilder.ApplyConfiguration(new UserEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new InstructionEquipmentConfiguration());
+            modelBuilder.ApplyConfiguration(new OrderEquipmentEntityConfiguration());
 
         }
     }
