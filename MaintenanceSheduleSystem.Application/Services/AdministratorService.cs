@@ -28,11 +28,8 @@ namespace MaintenanceSheduleSystem.Application.Services
 
             var result = await _administratorRepository.CreatePlanner(planner, adminId, signingKey);
 
-            if (!result) 
-            {
-                return false;
-            }
-            return true;
+           
+            return result;
         }
         public async Task<bool> CreateServiceman(Guid adminId, string surname, string firstName, string lastName, string email, string password, string signingKey)
         {
@@ -41,17 +38,12 @@ namespace MaintenanceSheduleSystem.Application.Services
 
             var result = await _administratorRepository.CreateServiceman(serviceman, adminId, signingKey);
 
-            if (!result)
-            {
-                return false;
-            }
-            return true;
+            return result;
         }
 
         public async Task<bool> UpdateAdminProfile(Guid id, string surname, string firstName, string lastName, string email) 
         {
             var result = await _administratorRepository.UpdateAdministrator(id, surname, firstName, lastName, email);
-
             return result;
         }
         public async Task<bool> UpdatePlannerProfile(Guid adminId, string signingKey, Guid id, string surname, string firstName, string lastName, string email, string title)

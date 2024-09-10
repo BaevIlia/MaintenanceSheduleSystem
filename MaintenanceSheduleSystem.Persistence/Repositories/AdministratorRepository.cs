@@ -87,16 +87,23 @@ namespace MaintenanceSheduleSystem.Persistence.Repositories
         }
         public async Task<object> GetProfile(Guid id)
         {
-            AdministratorEntity entity = await _dbContext.Administrators.FindAsync(id);
-
+            AdministratorEntity? entity = await _dbContext.Administrators.FindAsync(id);
+            if (entity is null) 
+            {
+                return new AdministratorEntity();
+            }
             Administrator profile = Administrator.Create(entity.Id, entity.Email, entity.HashedPassword, FullName.ParseFullName(entity.FullName), entity.SigningKey);
 
             return profile;
         }
         public async Task<bool> DeleteProfile(Guid id)
         {
-            UserEntity user = await _dbContext.Users.FindAsync(id);
+            UserEntity? user = await _dbContext.Users.FindAsync(id);
 
+            if (user is null) 
+            {
+                return false;
+            }
             user.IsSacked = true;
 
             await _dbContext.SaveChangesAsync();
@@ -106,17 +113,21 @@ namespace MaintenanceSheduleSystem.Persistence.Repositories
 
         public async Task<bool> UpdateAdministrator(Guid id, string surname, string firstName, string lastName, string email)
         {
-          
-                AdministratorEntity entity = await _dbContext.Administrators.FindAsync(id);
-
+            try
+            {
                 await _dbContext.Administrators
                     .Where(a => a.Id.Equals(id))
                     .ExecuteUpdateAsync(a => a
                     .SetProperty(a => a.FullName, new FullName(surname, firstName, lastName).ToString())
                     .SetProperty(a => a.Email, email)
                     );
+            }
+            catch 
+            {
+                return false;
+            }
 
-                
+             
             
             return true;
 
@@ -126,16 +137,17 @@ namespace MaintenanceSheduleSystem.Persistence.Repositories
         {
             if (CheckSignKey(adminId, signingKey))
             {
-                PlannerEngineerEntity entity = await _dbContext.PlannerEngineers.FindAsync(id);
-
-                await _dbContext.PlannerEngineers
-                    .Where(p => p.Id.Equals(id))
-                    .ExecuteUpdateAsync(p => p
-                    .SetProperty(p => p.FullName, new FullName(surname, firstName, lastName).ToString())
-                    .SetProperty(p => p.Email, email)
-                    .SetProperty(p => p.Title, title)
-                    );
-
+                try
+                {
+                    await _dbContext.PlannerEngineers
+                        .Where(p => p.Id.Equals(id))
+                        .ExecuteUpdateAsync(p => p
+                        .SetProperty(p => p.FullName, new FullName(surname, firstName, lastName).ToString())
+                        .SetProperty(p => p.Email, email)
+                        .SetProperty(p => p.Title, title)
+                        );
+                }
+                catch { return false; }
 
                 return true;
 
@@ -149,16 +161,21 @@ namespace MaintenanceSheduleSystem.Persistence.Repositories
         {
             if (CheckSignKey(adminId, signingKey))
             {
-
-                ServicemanEntity entity = await _dbContext.Servicemen.FindAsync(id);
-                await _dbContext.Servicemen
-                    .Where(s => s.Id.Equals(id))
-                    .ExecuteUpdateAsync(s => s
-                    .SetProperty(p => p.FullName, new FullName(surname, firstName, lastName).ToString())
-                    .SetProperty(p => p.Email, email)
-                    );
+                try
+                {
+                    await _dbContext.Servicemen
+                        .Where(s => s.Id.Equals(id))
+                        .ExecuteUpdateAsync(s => s
+                        .SetProperty(p => p.FullName, new FullName(surname, firstName, lastName).ToString())
+                        .SetProperty(p => p.Email, email)
+                        );
+                 
+                }
+                catch 
+                {
+                    return false;
+                }
                 return true;
-
             }
             else 
             {
@@ -168,18 +185,27 @@ namespace MaintenanceSheduleSystem.Persistence.Repositories
 
         public async Task<bool> CreateKey(Guid id, string key) 
         {
-            await _dbContext.Administrators
-                .Where(a => a.Id.Equals(id))
-                .ExecuteUpdateAsync(a => a
-                .SetProperty(a => a.SigningKey, key)
-                );
-
+            try
+            {
+                await _dbContext.Administrators
+                    .Where(a => a.Id.Equals(id))
+                    .ExecuteUpdateAsync(a => a
+                    .SetProperty(a => a.SigningKey, key)
+                    );
+            }
+            catch 
+            {
+                return false;
+            }
             return true;
         }
         private bool CheckSignKey(Guid adminId, string signKey)
         {
             var admin = _dbContext.Administrators.Find(adminId);
-
+            if (admin is null) 
+            {
+                return false;
+            }
             if (!admin.SigningKey.Equals(signKey))
             {
                 return false;

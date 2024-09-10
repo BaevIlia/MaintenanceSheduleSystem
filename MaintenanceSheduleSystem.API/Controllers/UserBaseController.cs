@@ -19,13 +19,21 @@ namespace MaintenanceSheduleSystem.API.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(string id)
         {
+            if (id is null) 
+            {
+                return BadRequest("Идентификатор отсутствует");
+            }
             User result = await _userBaseService.GetById(Guid.Parse(id));
 
             return Ok(result);
         }
         [HttpPost("login")]
         public async Task<IActionResult> Login(string email, string password)
-        {           
+        {
+            if (String.IsNullOrWhiteSpace(email) || String.IsNullOrWhiteSpace(password)) 
+            {
+                return BadRequest("Логин или пароль пуст");
+            }
             string token = await _userBaseService.Login(email, password);
             HttpContext.Response.Cookies.Append("myCookies", token);
 
@@ -34,17 +42,27 @@ namespace MaintenanceSheduleSystem.API.Controllers
         }
         [Authorize]
         [HttpPost("logout")]
-        public void Logout()
+        public async Task<string> Logout()
         {
-            HttpContext.Response.Cookies.Delete("myCookies");
-
+            try
+            {
+                HttpContext.Response.Cookies.Delete("myCookies");
+            }
+            catch(Exception ex) 
+            {
+                return $"Ошибка выхода из профиля - {ex.Message}";
+            };
+            return "Успешно";
         }
         [Authorize]
         [HttpPatch("changePassword")]
         public async Task<IActionResult> ChangePassword(string userId, string newPassword) 
         {
             var result = await _userBaseService.ChangePassword(Guid.Parse(userId), newPassword);
-
+            if (!result) 
+            {
+                return BadRequest();
+            }
             return Ok(result);
         }
         
