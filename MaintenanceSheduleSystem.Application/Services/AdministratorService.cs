@@ -13,6 +13,7 @@ namespace MaintenanceSheduleSystem.Application.Services
     {
         private readonly IAdministratorRepository _administratorRepository;
         private readonly IPasswordHasher _passwordHasher;
+        private string PATH = $@"{Environment.CurrentDirectory}/key.txt";
 
         public AdministratorService(IAdministratorRepository administratorRepository, IPasswordHasher passwordHasher)
         {
@@ -86,6 +87,11 @@ namespace MaintenanceSheduleSystem.Application.Services
             if (!result) 
             {
                 throw new Exception("Ошибка записи ключа в БД");
+            }
+            using (FileStream fs = new FileStream(PATH, FileMode.OpenOrCreate)) 
+            {
+                using (StreamWriter streamWriter = new StreamWriter(fs))
+                    await streamWriter.WriteLineAsync(signingKey.ToString());
             }
             return signingKey;
         }
