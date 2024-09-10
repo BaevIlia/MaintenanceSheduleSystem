@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MaintenanceSheduleSystem.Core.Enums;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -16,7 +17,10 @@ namespace MaintenanceSheduleSystem.Persistence.Entities
         public string ServicemanName { get; set; } = string.Empty;
         public DateTime StartDateTime { get; set; }
         public DateTime BeginWorkDateTime { get; set; }
+        public DateTime DeadlineDateTime { get; set; }
         public DateTime CompliteDateTime { get; set; }
+        public TypeOfWork TypeOfWork { get; set; }
+        public Guid EquipmentListId { get; set; }
         public MachineAreaEntity? MachineArea { get; set; }
         public ServicemanEntity? Serviceman { get; set; }
 

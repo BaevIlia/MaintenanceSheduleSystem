@@ -25,7 +25,7 @@ namespace MaintenanceSheduleSystem.API.Controllers
         }
         [HttpPost("login")]
         public async Task<IActionResult> Login(string email, string password)
-        {
+        {           
             var result = await _userBaseService.Login(email, password);
             HttpContext.Response.Cookies.Append("myCookies", result);
 

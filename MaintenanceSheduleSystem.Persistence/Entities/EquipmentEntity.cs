@@ -11,10 +11,10 @@ namespace MaintenanceSheduleSystem.Persistence.Entities
     {
         public Guid Id { get; set; }
         public string Article { get; set; } = string.Empty;
-        public string EquipmentName { get; set; } = string.Empty;
+        public string Name { get; set; } = string.Empty;
         public string StoragePlace { get; set; } = string.Empty;
-        public EquipmentTypes EquipmentType  { get; set; }
-        public bool IsCritical { get; set; }
+        public EquipmentTypes Type  { get; set; }
+        public int Count { get; set; }
         public bool IsInStock { get; set; }
 
         public ICollection<HandbookEntity>? Handbooks { get; set; }
