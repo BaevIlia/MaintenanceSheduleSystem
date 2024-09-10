@@ -20,7 +20,6 @@ namespace MaintenanceSheduleSystem.Persistence.Entities
         public DateTime DeadlineDateTime { get; set; }
         public DateTime CompliteDateTime { get; set; }
         public TypeOfWork TypeOfWork { get; set; }
-        public Guid EquipmentListId { get; set; }
         public MachineAreaEntity? MachineArea { get; set; }
         public ServicemanEntity? Serviceman { get; set; }
 
