@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MaintenanceSheduleSystem.Persistence.Configurations;
 using MaintenanceSheduleSystem.Persistence.Entities;
+using MaintenanceSheduleSystem.Core.Interfaces;
 
 
 namespace MaintenanceSheduleSystem.Persistence
@@ -41,6 +42,7 @@ namespace MaintenanceSheduleSystem.Persistence
             modelBuilder.ApplyConfiguration(new UserEntityConfiguration());
             modelBuilder.ApplyConfiguration(new InstructionEquipmentConfiguration());
             modelBuilder.ApplyConfiguration(new OrderEquipmentEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new AdministratorEntityConfiguration());
 
         }
     }

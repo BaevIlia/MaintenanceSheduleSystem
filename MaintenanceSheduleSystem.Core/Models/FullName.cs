@@ -26,6 +26,10 @@ namespace MaintenanceSheduleSystem.Core.Models
         public static FullName ParseFullName(string fullName) 
         {
             string[] nameParts = fullName.Split(' ');
+            if (nameParts.Length <3) 
+            {
+                throw new Exception("В строке полного имени отсутствует одна из частей - фамилия, имя или отчество");
+            }
             string surname = nameParts[0];
             string firstName = nameParts[1];
             string lastName = nameParts[2];
