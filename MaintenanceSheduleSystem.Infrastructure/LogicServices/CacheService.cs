@@ -26,6 +26,10 @@ namespace MaintenanceSheduleSystem.Infrastructure.LogicServices
             if (resutlString != null)
             {
                 data = JsonSerializer.Deserialize<T>(resutlString);
+                if (data is null) 
+                {
+                    throw new Exception("Ошибка десериализации из кэша");
+                }
                 return data as T;
             }
             return data as T;

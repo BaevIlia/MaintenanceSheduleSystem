@@ -50,11 +50,15 @@ namespace MaintenanceSheduleSystem.Persistence.Repositories
         public async Task<User> GetById(Guid id) 
         {
 
-            UserEntity userEntity = await _cacheService.GetFromCache<UserEntity>(id.ToString());
+            UserEntity? userEntity = await _cacheService.GetFromCache<UserEntity>(id.ToString());
 
             if (userEntity is null) 
             {
                 userEntity = await _context.Users.FindAsync(id);
+                if (userEntity is null) 
+                {
+                    throw new Exception("Пользователя не существует");
+                }
                 await _cacheService.WriteToCache(userEntity, id.ToString());
             }
 
