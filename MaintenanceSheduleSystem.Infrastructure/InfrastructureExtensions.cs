@@ -9,11 +9,15 @@ namespace MaintenanceSheduleSystem.Infrastructure
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration) 
         {
+            var redisConfiguration = configuration.GetSection("Redis");
             services.AddScoped<IPasswordHasher, PasswordHasher>();
             services.AddScoped<IJwtProviderService, JwtProviderService>();
             services.AddScoped<ICacheService, CacheService>();
 
-      
+            services.AddStackExchangeRedisCache(options =>
+            {
+                options.Configuration = redisConfiguration["Host"];
+            });
           
             return services;
         }
