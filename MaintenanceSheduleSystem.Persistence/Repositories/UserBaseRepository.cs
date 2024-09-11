@@ -10,10 +10,11 @@ namespace MaintenanceSheduleSystem.Persistence.Repositories
     public class UserBaseRepository : IUserBaseRepository
     {
         private readonly ApplicationDbContext _context;
-
-        public UserBaseRepository(ApplicationDbContext context)
+        private readonly ICacheService _cacheService;
+        public UserBaseRepository(ApplicationDbContext context, ICacheService cacheService)
         {
             _context = context;
+            _cacheService = cacheService;
         }
 
         public async Task<bool> ChangePassword(User user,  string newHashedPassword)
@@ -33,11 +34,12 @@ namespace MaintenanceSheduleSystem.Persistence.Repositories
 
         public async Task<User> GetByEmail(string email)
         {
-            UserEntity? userEntity = await _context.Users.Where(u => u.Email.Equals(email)).FirstOrDefaultAsync();
+            UserEntity? userEntity = await _cacheService.GetFromCache<UserEntity>(email);
 
             if (userEntity is null) 
             {
-                throw new Exception("Пользователя с таким email не существует");
+                userEntity = await _context.Users.Where(u => u.Email.Equals(email)).FirstOrDefaultAsync();
+                await _cacheService.WriteToCache(userEntity, email);
             }
 
             User user = new(userEntity.Id, userEntity.Email, userEntity.HashedPassword, FullName.ParseFullName(userEntity.FullName), userEntity.Role);
@@ -47,12 +49,13 @@ namespace MaintenanceSheduleSystem.Persistence.Repositories
         }
         public async Task<User> GetById(Guid id) 
         {
-            
-            UserEntity userEntity = await _context.Users.FindAsync(id);
+
+            UserEntity userEntity = await _cacheService.GetFromCache<UserEntity>(id.ToString());
 
             if (userEntity is null) 
             {
-                throw new ArgumentNullException("Пользователя с таким идентификатором не существует");
+                userEntity = await _context.Users.FindAsync(id);
+                await _cacheService.WriteToCache(userEntity, id.ToString());
             }
 
             User user = new(userEntity.Id, userEntity.Email, userEntity.HashedPassword, FullName.ParseFullName(userEntity.FullName), userEntity.Role);

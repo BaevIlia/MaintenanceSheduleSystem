@@ -17,11 +17,17 @@ namespace MaintenanceSheduleSystem.API
 
             builder.Services.AddControllers();
             builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection(nameof(JwtOptions)));
+
+            builder.Services.AddStackExchangeRedisCache(options =>
+            {
+                options.Configuration = "localhost";
+                
+            });
             builder.Services.AddPersistence(builder.Configuration);
             builder.Services.AddApplication();
-            builder.Services.AddInfrastructure();
+            builder.Services.AddInfrastructure(builder.Configuration);
             builder.Services.AddApiAuthentication(builder.Configuration);
-
+            
             var app = builder.Build();
 
             if (app.Environment.IsDevelopment()) 
