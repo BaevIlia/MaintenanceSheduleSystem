@@ -22,10 +22,10 @@ namespace MaintenanceSheduleSystem.Application.Services
             return new List<Order>();
         }
 
-        public async Task<Order> GetOrder()
+        /*public async Task<Order> GetOrder()
         {
            
-        }
+        }*/
 
         public async Task<Guid> CreateOrder() 
         {

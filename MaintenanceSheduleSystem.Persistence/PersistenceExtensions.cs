@@ -26,6 +26,7 @@ namespace MaintenanceSheduleSystem.Persistence
 
             services.AddScoped<IUserBaseRepository, UserBaseRepository>();
             services.AddScoped<IAdministratorRepository, AdministratorRepository>();
+            services.AddScoped<IOrderRepository, OrderRepository>();
     
 
             return services;

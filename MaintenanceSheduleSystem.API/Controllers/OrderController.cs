@@ -7,7 +7,7 @@ namespace MaintenanceSheduleSystem.API.Controllers
     [Route("[controller]")]
     public class OrderController : ControllerBase
     {
-        [HttpGet]
+        [HttpGet("orders")]
         public async Task<IActionResult> GetAll()
         {
             return Ok();
@@ -20,19 +20,19 @@ namespace MaintenanceSheduleSystem.API.Controllers
             return Ok();
         }
 
-        [HttpPost]
+        [HttpPost("create")]
         public async Task<IActionResult> CreateOrder() 
         {
             return Created();
         }
 
-        [HttpPut]
+        [HttpPut("update")]
         public async Task<IActionResult> UpdateOrder() 
         {
             return Ok();
         }
 
-        [HttpDelete]
+        [HttpDelete("delete")]
         public async Task<IActionResult> DeleteOrder() 
         {
             return Ok();

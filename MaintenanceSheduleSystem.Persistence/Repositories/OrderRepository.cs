@@ -1,5 +1,7 @@
-﻿using MaintenanceSheduleSystem.Core.Interfaces;
+﻿using MaintenanceSheduleSystem.Core.Enums;
+using MaintenanceSheduleSystem.Core.Interfaces;
 using MaintenanceSheduleSystem.Core.Models;
+using MaintenanceSheduleSystem.Persistence.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +10,15 @@ using System.Threading.Tasks;
 
 namespace MaintenanceSheduleSystem.Persistence.Repositories
 {
-    public class PlannerEngineerRepository : IOrderRepository
+    public class OrderRepository : IOrderRepository
     {
-        public Task<Guid> CreateOrder()
+        private readonly ApplicationDbContext _dbContext;
+
+        public OrderRepository(ApplicationDbContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
+        public Task<Guid> CreateOrder(string machineName, string areaName, string orderName, string orderDescription, string servicemanName, DateTime deadlineDate, TypeOfWork typeOfWork, List<Equipment> equipments)
         {
             throw new NotImplementedException();
         }
