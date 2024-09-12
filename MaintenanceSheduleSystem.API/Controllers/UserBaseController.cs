@@ -1,4 +1,5 @@
 ﻿using MaintenanceSheduleSystem.Application.Services;
+using MaintenanceSheduleSystem.Core.Dto.UserBaseDto_s;
 using MaintenanceSheduleSystem.Core.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -28,20 +29,20 @@ namespace MaintenanceSheduleSystem.API.Controllers
             return Ok(result);
         }
         [HttpPost("login")]
-        public async Task<IActionResult> Login(string email, string password)
+        public async Task<IActionResult> Login(LoginDto request)
         {
-            if (String.IsNullOrWhiteSpace(email) || String.IsNullOrWhiteSpace(password)) 
+            if (String.IsNullOrWhiteSpace(request.email) || String.IsNullOrWhiteSpace(request.password)) 
             {
                 return BadRequest("Логин или пароль пуст");
             }
-            if (!email.EndsWith("@domain.ru")) 
+            if (!request.email.EndsWith("@domain.ru")) 
             {
                 return BadRequest("Почта с таким доменом недопустима");
             }
-            string token = await _userBaseService.Login(email, password);
+            string token = await _userBaseService.Login(request.email, request.password);
             HttpContext.Response.Cookies.Append("myCookies", token);
 
-            var result = await _userBaseService.GetByEmail(email);
+            var result = await _userBaseService.GetByEmail(request.email);
             return Ok(result);
         }
         [Authorize]
@@ -60,9 +61,9 @@ namespace MaintenanceSheduleSystem.API.Controllers
         }
         [Authorize]
         [HttpPatch("changePassword")]
-        public async Task<IActionResult> ChangePassword(string userId, string newPassword) 
+        public async Task<IActionResult> ChangePassword(ChangePasswordDto request) 
         {
-            var result = await _userBaseService.ChangePassword(Guid.Parse(userId), newPassword);
+            var result = await _userBaseService.ChangePassword(Guid.Parse(request.userId), request.newPassword);
             if (!result) 
             {
                 return BadRequest();

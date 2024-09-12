@@ -1,4 +1,5 @@
 ﻿using MaintenanceSheduleSystem.Application.Services;
+using MaintenanceSheduleSystem.Core.Dto.AdministratorDto_s;
 using MaintenanceSheduleSystem.Core.Enums;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -18,17 +19,17 @@ namespace MaintenanceSheduleSystem.API.Controllers
          
         }
         [HttpPost("createPlanner")]
-        public async Task<IActionResult> CreatePlanner(string adminId, string surname, string firstName, string lastName, string email, string password, string title, string signingKey) 
+        public async Task<IActionResult> CreatePlanner(CreatePlannerEngineerDto request) 
         {
             var result = await _administratorService.CreatePlanner(
-                Guid.Parse(adminId),
-                surname,
-                firstName,
-                lastName,
-                email,
-                password,
-                title,
-                signingKey);
+                Guid.Parse(request.adminId),
+                request.surname,
+                request.firstName,
+                request.lastName,
+                request.email,
+                request.password,
+                request.title,
+                request.signingKey);
 
             if (!result) 
             {
@@ -37,9 +38,16 @@ namespace MaintenanceSheduleSystem.API.Controllers
             return Ok(result);
         }
         [HttpPost("createServiceman")]
-        public async Task<IActionResult> CreateServiceman(string adminId, string surname, string firstName, string lastName, string email, string password, string signingKey) 
+        public async Task<IActionResult> CreateServiceman(CreateServicemanDto request) 
         {
-            var result = await _administratorService.CreateServiceman(Guid.Parse(adminId), surname, firstName, lastName, email, password, signingKey);
+            var result = await _administratorService.CreateServiceman(
+                Guid.Parse(request.adminId),
+                request.surname,
+                request.firstName,
+                request.lastName, 
+                request.email, 
+                request.password,
+                request.signingKey);
             if (!result)
                 return BadRequest("Ошибка создания сотрудника сервиса");
             return Ok(result);
@@ -52,31 +60,51 @@ namespace MaintenanceSheduleSystem.API.Controllers
 
             if (result is null) 
             {
-                return BadRequest("Такого профиля не существует");
+                return NotFound("Такого профиля не существует");
             }
             return Ok(result);
         }
         [HttpPut("updateAdmin")]
-        public async Task<IActionResult> UpdateAdmin(string id, string surname, string firstName, string lastName, string email) 
+        public async Task<IActionResult> UpdateAdmin(UpdateAdminDto request) 
         {
-            var result = await _administratorService.UpdateAdminProfile(Guid.Parse(id), surname, firstName, lastName, email);
+            var result = await _administratorService.UpdateAdminProfile(
+                Guid.Parse(request.id),
+                request.surname,
+                request.firstName,
+                request.lastName,
+                request.email);
 
             if (!result)
                 return BadRequest("Ошибка обновления профиля администратора");
             return Ok(result);
         }
         [HttpPut("updatePlanner")]
-        public async Task<IActionResult> UpdatePlannerEngineer(string adminId, string signingKey, string id, string surname, string firstName, string lastName,string title, string email)
+        public async Task<IActionResult> UpdatePlannerEngineer(UpdatePlannerEngineerDto request)
         {
-            var result = await _administratorService.UpdatePlannerProfile(Guid.Parse(adminId), signingKey, Guid.Parse(id), surname, firstName, lastName, email, title);
+            var result = await _administratorService.UpdatePlannerProfile(
+                Guid.Parse(request.adminId),
+                request.signingKey,
+                Guid.Parse(request.id),
+                request.surname,
+                request.firstName,
+                request.lastName,
+                request.email,
+                request.title);
             if (!result)
                 return BadRequest("Ошибка обновления профиля планёра");
             return Ok(result);
         }
         [HttpPut("updateServiceman")]
-        public async Task<IActionResult> UpdateServiceman(string adminId, string signingKey, string id, string surname, string firstName, string lastName, string email)
+        public async Task<IActionResult> UpdateServiceman(UpdateServicemanDto request)
         {
-            var result = await _administratorService.UpdateServicemanProfile(Guid.Parse(adminId), signingKey, Guid.Parse(id), surname, firstName, lastName, email);
+            var result = await _administratorService.UpdateServicemanProfile(
+                Guid.Parse(request.adminId), 
+                request.signingKey,
+                Guid.Parse(request.id),
+                request.surname,
+                request.firstName,
+                request.lastName,
+                request.email);
 
             if (!result)
                 return BadRequest("Ошибка обновления профиля сервисного сотрудника");
