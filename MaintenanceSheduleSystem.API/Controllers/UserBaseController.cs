@@ -24,7 +24,20 @@ namespace MaintenanceSheduleSystem.API.Controllers
             {
                 return BadRequest("Идентификатор отсутствует");
             }
-            User result = await _userBaseService.GetById(Guid.Parse(id));
+            User result = null;
+            try
+            {
+                result = await _userBaseService.GetById(Guid.Parse(id));
+            }
+            catch (NullReferenceException ex)
+            {
+                return StatusCode(500, "Пользователя не существует");
+            }
+            catch (Exception ex) 
+            {
+                return StatusCode(500, "Возникла непредвиденная ошибка");
+            }
+       
 
             return Ok(result);
         }

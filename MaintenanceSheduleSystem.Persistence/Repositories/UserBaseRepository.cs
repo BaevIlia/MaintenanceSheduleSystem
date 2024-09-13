@@ -34,32 +34,43 @@ namespace MaintenanceSheduleSystem.Persistence.Repositories
 
         public async Task<User> GetByEmail(string email)
         {
-            UserEntity? userEntity = await _cacheService.GetFromCache<UserEntity>(email);
-
-            if (userEntity is null) 
+            UserEntity? userEntity = null;
+            try
+            {
+                userEntity = await _cacheService.GetFromCache<UserEntity>(email);
+                if (userEntity is null)
+                {
+                    userEntity = await _context.Users.Where(u => u.Email.Equals(email)).FirstOrDefaultAsync() ?? throw new Exception("Такого пользователя не существует");
+                    await _cacheService.WriteToCache(userEntity, email);
+                }
+            }
+            catch (SystemException ex) 
             {
                 userEntity = await _context.Users.Where(u => u.Email.Equals(email)).FirstOrDefaultAsync();
-                await _cacheService.WriteToCache(userEntity, email);
             }
-
+            
             User user = new(userEntity.Id, userEntity.Email, userEntity.HashedPassword, FullName.ParseFullName(userEntity.FullName), userEntity.Role);
-
-
             return user;
+
         }
         public async Task<User> GetById(Guid id) 
         {
 
-            UserEntity? userEntity = await _cacheService.GetFromCache<UserEntity>(id.ToString());
+            UserEntity? userEntity = null;
+            try
+            {
+                await _cacheService.GetFromCache<UserEntity>(id.ToString());
 
-            if (userEntity is null) 
+                if (userEntity is null)
+                {
+                    userEntity = await _context.Users.FindAsync(id) ?? throw new Exception("Такого пользователя не существует");
+                    
+                    await _cacheService.WriteToCache(userEntity, id.ToString());
+                }
+            }
+            catch (SystemException ex) 
             {
                 userEntity = await _context.Users.FindAsync(id);
-                if (userEntity is null) 
-                {
-                    throw new Exception("Пользователя не существует");
-                }
-                await _cacheService.WriteToCache(userEntity, id.ToString());
             }
 
             User user = new(userEntity.Id, userEntity.Email, userEntity.HashedPassword, FullName.ParseFullName(userEntity.FullName), userEntity.Role);

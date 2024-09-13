@@ -20,19 +20,26 @@ namespace MaintenanceSheduleSystem.Infrastructure.LogicServices
 
         public async Task<T> GetFromCache<T>(string key) where T : class
         {
-            var resutlString = await _cache.GetAsync(key);
-
-            object? data = null;
-            if (resutlString != null)
+            try
             {
-                data = JsonSerializer.Deserialize<T>(resutlString);
-                if (data is null) 
+                var resutlString = await _cache.GetAsync(key);
+
+                object? data = null;
+                if (resutlString != null)
                 {
-                    throw new Exception("Ошибка десериализации из кэша");
+                    data = JsonSerializer.Deserialize<T>(resutlString);
+                    if (data is null)
+                    {
+                        throw new Exception("Ошибка десериализации из кэша");
+                    }
+                    return data as T;
                 }
                 return data as T;
             }
-            return data as T;
+            catch (Exception ex) 
+            {
+                throw new SystemException(ex.Message);
+            }
         }
         public async Task<bool> WriteToCache(object data, string key)
         {
