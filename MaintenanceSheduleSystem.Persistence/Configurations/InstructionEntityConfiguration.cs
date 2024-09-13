@@ -1,4 +1,5 @@
-﻿using MaintenanceSheduleSystem.Persistence.Entities;
+﻿using MaintenanceSheduleSystem.Core.Enums;
+using MaintenanceSheduleSystem.Persistence.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
@@ -20,8 +21,17 @@ namespace MaintenanceSheduleSystem.Persistence.Configurations
                 .HasForeignKey(h => h.AreaId);
 
             builder.HasMany(h => h.Equipments)
-                .WithMany(eq => eq.Handbooks)
+                .WithMany(eq => eq.Instructions)
                 .UsingEntity<InstructionEquipmentEntity>();
+
+            builder.HasData(
+                new InstructionEntity
+                {
+                    Id = Guid.Parse("c1529764-27da-4207-9d7d-5981d9ba6b34"),
+                    AreaId = Guid.Parse("f6cd323f-9c21-4dc6-8533-493a89d6459a"),
+                    TypeOfWork = Core.Enums.TypeOfWork.Maintenance,
+                    Instructions = "TestDesc",
+                });
             
         }
     }

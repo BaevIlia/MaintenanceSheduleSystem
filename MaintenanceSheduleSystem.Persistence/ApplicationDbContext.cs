@@ -24,11 +24,11 @@ namespace MaintenanceSheduleSystem.Persistence
         public DbSet<PlannerEngineerEntity> PlannerEngineers { get; set; }
         public DbSet<ServicemanEntity> Servicemen { get; set; }
         public DbSet<EquipmentEntity> Equipments { get; set; }
-        public DbSet<InstructionEntity> Handbooks { get; set; }
+        public DbSet<InstructionEntity> Instructions { get; set; }
         public DbSet<MachineEntity> Machines { get; set; }
         public DbSet<OrderEntity> Orders { get; set; }
         public DbSet<MachineAreaEntity> MachineAreas { get; set; }
-        public DbSet<InstructionEquipmentEntity> HandbookEquipment { get; set; }
+        public DbSet<InstructionEquipmentEntity> InstructionEquipment { get; set; }
         public DbSet<OrderEquipmentEntity> OrderEquipment { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -38,11 +38,12 @@ namespace MaintenanceSheduleSystem.Persistence
             modelBuilder.ApplyConfiguration(new MachineAreaEntityConfiguration());
             modelBuilder.ApplyConfiguration(new MachineEntityConfiguration());
             modelBuilder.ApplyConfiguration(new OrderEntityConfiguration());
-            modelBuilder.ApplyConfiguration(new ServicemanEntityConfiguration());
             modelBuilder.ApplyConfiguration(new UserEntityConfiguration());
             modelBuilder.ApplyConfiguration(new InstructionEquipmentConfiguration());
             modelBuilder.ApplyConfiguration(new OrderEquipmentEntityConfiguration());
             modelBuilder.ApplyConfiguration(new AdministratorEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new PlannerEngineerConfiguration());
+            modelBuilder.ApplyConfiguration(new ServicemanEntityConfiguration());
 
         }
     }

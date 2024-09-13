@@ -1,4 +1,5 @@
-﻿using MaintenanceSheduleSystem.Persistence.Entities;
+﻿using MaintenanceSheduleSystem.Core.Enums;
+using MaintenanceSheduleSystem.Persistence.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
@@ -17,7 +18,15 @@ namespace MaintenanceSheduleSystem.Persistence.Configurations
 
             builder.HasMany(m => m.MachineAreas)
                 .WithOne(a => a.Machine);
-                
+
+            builder.HasData(
+                new MachineEntity
+                {
+                    Id = Guid.Parse("baf57b0d-d6dd-481e-8b7b-ba03f57dab9c"),
+                    Name = "TestLine",
+                    SerialNumber = "123",
+                  
+                });
         }
     }
 }

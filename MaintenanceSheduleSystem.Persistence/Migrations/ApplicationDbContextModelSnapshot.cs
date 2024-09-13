@@ -52,6 +52,28 @@ namespace MaintenanceSheduleSystem.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Equipments");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("f84c16d1-5373-46b1-8340-db980e94bf32"),
+                            Article = "12345",
+                            Count = 10,
+                            IsInStock = true,
+                            Name = "TestSpare",
+                            StoragePlace = "A1",
+                            Type = 2
+                        },
+                        new
+                        {
+                            Id = new Guid("1a1db12d-0106-4d06-afc9-8cea47ff876e"),
+                            Article = "3421",
+                            Count = 2,
+                            IsInStock = true,
+                            Name = "TestInstrument",
+                            StoragePlace = "A2",
+                            Type = 1
+                        });
                 });
 
             modelBuilder.Entity("MaintenanceSheduleSystem.Persistence.Entities.InstructionEntity", b =>
@@ -61,9 +83,6 @@ namespace MaintenanceSheduleSystem.Persistence.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<Guid>("AreaId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("EquipmentListId")
                         .HasColumnType("uuid");
 
                     b.Property<string>("Instructions")
@@ -77,30 +96,43 @@ namespace MaintenanceSheduleSystem.Persistence.Migrations
 
                     b.HasIndex("AreaId");
 
-                    b.ToTable("Handbooks");
+                    b.ToTable("Instructions");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("c1529764-27da-4207-9d7d-5981d9ba6b34"),
+                            AreaId = new Guid("f6cd323f-9c21-4dc6-8533-493a89d6459a"),
+                            Instructions = "TestDesc",
+                            TypeOfWork = 1
+                        });
                 });
 
             modelBuilder.Entity("MaintenanceSheduleSystem.Persistence.Entities.InstructionEquipmentEntity", b =>
                 {
+                    b.Property<Guid>("InstructionId")
+                        .HasColumnType("uuid");
+
                     b.Property<Guid>("EquipmentId")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("HandbookId")
-                        .HasColumnType("uuid");
+                    b.HasKey("InstructionId", "EquipmentId");
 
-                    b.Property<Guid>("EquipmentsId")
-                        .HasColumnType("uuid");
+                    b.HasIndex("EquipmentId");
 
-                    b.Property<Guid>("HandbooksId")
-                        .HasColumnType("uuid");
+                    b.ToTable("InstructionEquipment");
 
-                    b.HasKey("EquipmentId", "HandbookId");
-
-                    b.HasIndex("EquipmentsId");
-
-                    b.HasIndex("HandbooksId");
-
-                    b.ToTable("HandbookEquipment");
+                    b.HasData(
+                        new
+                        {
+                            InstructionId = new Guid("c1529764-27da-4207-9d7d-5981d9ba6b34"),
+                            EquipmentId = new Guid("f84c16d1-5373-46b1-8340-db980e94bf32")
+                        },
+                        new
+                        {
+                            InstructionId = new Guid("c1529764-27da-4207-9d7d-5981d9ba6b34"),
+                            EquipmentId = new Guid("1a1db12d-0106-4d06-afc9-8cea47ff876e")
+                        });
                 });
 
             modelBuilder.Entity("MaintenanceSheduleSystem.Persistence.Entities.MachineAreaEntity", b =>
@@ -117,9 +149,6 @@ namespace MaintenanceSheduleSystem.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<Guid>("InstructionId")
-                        .HasColumnType("uuid");
-
                     b.Property<Guid>("MachineId")
                         .HasColumnType("uuid");
 
@@ -128,6 +157,15 @@ namespace MaintenanceSheduleSystem.Persistence.Migrations
                     b.HasIndex("MachineId");
 
                     b.ToTable("MachineAreas");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("f6cd323f-9c21-4dc6-8533-493a89d6459a"),
+                            AreaDescription = "TestDesc",
+                            AreaName = "TestArea",
+                            MachineId = new Guid("baf57b0d-d6dd-481e-8b7b-ba03f57dab9c")
+                        });
                 });
 
             modelBuilder.Entity("MaintenanceSheduleSystem.Persistence.Entities.MachineEntity", b =>
@@ -147,23 +185,35 @@ namespace MaintenanceSheduleSystem.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Machines");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("baf57b0d-d6dd-481e-8b7b-ba03f57dab9c"),
+                            Name = "TestLine",
+                            SerialNumber = "123"
+                        });
                 });
 
             modelBuilder.Entity("MaintenanceSheduleSystem.Persistence.Entities.OrderEntity", b =>
                 {
                     b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
                     b.Property<Guid>("AreaId")
                         .HasColumnType("uuid");
 
-                    b.Property<DateTime>("BeginWorkDateTime")
+                    b.Property<DateTime?>("BeginWorkDateTime")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<DateTime>("CompliteDateTime")
+                    b.Property<DateTime?>("CompliteDateTime")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<DateTime>("DeadlineDateTime")
+                    b.Property<DateTime>("CreatedDateTime")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime?>("DeadlineDateTime")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Description")
@@ -177,12 +227,11 @@ namespace MaintenanceSheduleSystem.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("ServicemanName")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<Guid>("PlannerEngineerId")
+                        .HasColumnType("uuid");
 
-                    b.Property<DateTime>("StartDateTime")
-                        .HasColumnType("timestamp with time zone");
+                    b.Property<Guid>("ServicemanId")
+                        .HasColumnType("uuid");
 
                     b.Property<int>("TypeOfWork")
                         .HasColumnType("integer");
@@ -191,7 +240,25 @@ namespace MaintenanceSheduleSystem.Persistence.Migrations
 
                     b.HasIndex("AreaId");
 
+                    b.HasIndex("PlannerEngineerId");
+
+                    b.HasIndex("ServicemanId");
+
                     b.ToTable("Orders");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("12055903-390d-42e7-b98f-16dfe77f053e"),
+                            AreaId = new Guid("f6cd323f-9c21-4dc6-8533-493a89d6459a"),
+                            CreatedDateTime = new DateTime(2024, 9, 13, 9, 5, 24, 583, DateTimeKind.Utc).AddTicks(6805),
+                            Description = "TestOrderDesc",
+                            MachineId = new Guid("baf57b0d-d6dd-481e-8b7b-ba03f57dab9c"),
+                            Name = "TestOrder",
+                            PlannerEngineerId = new Guid("a69b942d-6024-4cb9-99ab-fdb813dda151"),
+                            ServicemanId = new Guid("69fc24dd-44ed-460e-b183-36da93374664"),
+                            TypeOfWork = 1
+                        });
                 });
 
             modelBuilder.Entity("MaintenanceSheduleSystem.Persistence.Entities.OrderEquipmentEntity", b =>
@@ -202,19 +269,23 @@ namespace MaintenanceSheduleSystem.Persistence.Migrations
                     b.Property<Guid>("EquipmentId")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("EquipmentsId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("OrdersId")
-                        .HasColumnType("uuid");
-
                     b.HasKey("OrderId", "EquipmentId");
 
-                    b.HasIndex("EquipmentsId");
-
-                    b.HasIndex("OrdersId");
+                    b.HasIndex("EquipmentId");
 
                     b.ToTable("OrderEquipment");
+
+                    b.HasData(
+                        new
+                        {
+                            OrderId = new Guid("12055903-390d-42e7-b98f-16dfe77f053e"),
+                            EquipmentId = new Guid("f84c16d1-5373-46b1-8340-db980e94bf32")
+                        },
+                        new
+                        {
+                            OrderId = new Guid("12055903-390d-42e7-b98f-16dfe77f053e"),
+                            EquipmentId = new Guid("1a1db12d-0106-4d06-afc9-8cea47ff876e")
+                        });
                 });
 
             modelBuilder.Entity("MaintenanceSheduleSystem.Persistence.Entities.UserEntity", b =>
@@ -242,7 +313,7 @@ namespace MaintenanceSheduleSystem.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Email", "HashedPassword")
+                    b.HasIndex("Email")
                         .IsUnique();
 
                     b.ToTable("Users");
@@ -263,10 +334,10 @@ namespace MaintenanceSheduleSystem.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("dac5f915-53bb-4056-bde6-f4987056c1e7"),
+                            Id = new Guid("5ac264b6-7490-48b2-93ca-63204fb0bc7b"),
                             Email = "test@domain.ru",
                             FullName = "surname name lastname",
-                            HashedPassword = "$2a$11$rFu15a3nlKXtN1uRT08pNeskp0DTOiX5RKAwVMlxF/fvXHOffrQqi",
+                            HashedPassword = "$2a$11$T0wSes1Px3b36eJpNdRHbeshK5Kt6Me2QOCLG8SCPS.dxdJN6P/fC",
                             IsSacked = false,
                             Role = 1,
                             SigningKey = ""
@@ -282,6 +353,18 @@ namespace MaintenanceSheduleSystem.Persistence.Migrations
                         .HasColumnType("text");
 
                     b.ToTable("PlannerEngineers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("a69b942d-6024-4cb9-99ab-fdb813dda151"),
+                            Email = "testPlanner@domain.ru",
+                            FullName = "Test, Test, Planner",
+                            HashedPassword = "$2a$11$Vh3n0jyAVetsM6PcR30yJuTyPpo7OFfw3lqBK0qL86pOapvusggPa",
+                            IsSacked = false,
+                            Role = 2,
+                            Title = "TestTitle"
+                        });
                 });
 
             modelBuilder.Entity("MaintenanceSheduleSystem.Persistence.Entities.ServicemanEntity", b =>
@@ -289,6 +372,17 @@ namespace MaintenanceSheduleSystem.Persistence.Migrations
                     b.HasBaseType("MaintenanceSheduleSystem.Persistence.Entities.UserEntity");
 
                     b.ToTable("Servicemen");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("69fc24dd-44ed-460e-b183-36da93374664"),
+                            Email = "testService@domain.ru",
+                            FullName = "Test Test Serviceman",
+                            HashedPassword = "$2a$11$kAm937PqzogwGaKuzd1MfeRDvtAylmSe6E3RM.ca5wRqM.pFf.LM6",
+                            IsSacked = false,
+                            Role = 3
+                        });
                 });
 
             modelBuilder.Entity("MaintenanceSheduleSystem.Persistence.Entities.InstructionEntity", b =>
@@ -306,13 +400,13 @@ namespace MaintenanceSheduleSystem.Persistence.Migrations
                 {
                     b.HasOne("MaintenanceSheduleSystem.Persistence.Entities.EquipmentEntity", null)
                         .WithMany()
-                        .HasForeignKey("EquipmentsId")
+                        .HasForeignKey("EquipmentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("MaintenanceSheduleSystem.Persistence.Entities.InstructionEntity", null)
                         .WithMany()
-                        .HasForeignKey("HandbooksId")
+                        .HasForeignKey("InstructionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -336,13 +430,21 @@ namespace MaintenanceSheduleSystem.Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("MaintenanceSheduleSystem.Persistence.Entities.PlannerEngineerEntity", "PlannerEngineer")
+                        .WithMany("Orders")
+                        .HasForeignKey("PlannerEngineerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("MaintenanceSheduleSystem.Persistence.Entities.ServicemanEntity", "Serviceman")
                         .WithMany("Orders")
-                        .HasForeignKey("Id")
+                        .HasForeignKey("ServicemanId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("MachineArea");
+
+                    b.Navigation("PlannerEngineer");
 
                     b.Navigation("Serviceman");
                 });
@@ -351,13 +453,13 @@ namespace MaintenanceSheduleSystem.Persistence.Migrations
                 {
                     b.HasOne("MaintenanceSheduleSystem.Persistence.Entities.EquipmentEntity", null)
                         .WithMany()
-                        .HasForeignKey("EquipmentsId")
+                        .HasForeignKey("EquipmentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("MaintenanceSheduleSystem.Persistence.Entities.OrderEntity", null)
                         .WithMany()
-                        .HasForeignKey("OrdersId")
+                        .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -399,6 +501,11 @@ namespace MaintenanceSheduleSystem.Persistence.Migrations
             modelBuilder.Entity("MaintenanceSheduleSystem.Persistence.Entities.MachineEntity", b =>
                 {
                     b.Navigation("MachineAreas");
+                });
+
+            modelBuilder.Entity("MaintenanceSheduleSystem.Persistence.Entities.PlannerEngineerEntity", b =>
+                {
+                    b.Navigation("Orders");
                 });
 
             modelBuilder.Entity("MaintenanceSheduleSystem.Persistence.Entities.ServicemanEntity", b =>

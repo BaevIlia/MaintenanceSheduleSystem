@@ -17,7 +17,7 @@ namespace MaintenanceSheduleSystem.Persistence.Entities
         public int Count { get; set; }
         public bool IsInStock { get; set; }
 
-        public ICollection<InstructionEntity>? Handbooks { get; set; }
+        public ICollection<InstructionEntity>? Instructions { get; set; }
         public ICollection<OrderEntity>? Orders { get; set; }
     }
 }

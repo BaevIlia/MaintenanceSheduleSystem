@@ -15,15 +15,16 @@ namespace MaintenanceSheduleSystem.Persistence.Entities
         public Guid AreaId { get; set; }
         public string Name { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
-        public string ServicemanName { get; set; } = string.Empty;
-        public DateTime StartDateTime { get; set; }
-        public DateTime BeginWorkDateTime { get; set; }
-        public DateTime DeadlineDateTime { get; set; }
-        public DateTime CompliteDateTime { get; set; }
+        public Guid PlannerEngineerId { get; set; }
+        public Guid ServicemanId { get; set; }
+        public DateTime CreatedDateTime { get; set; }
+        public DateTime? BeginWorkDateTime { get; set; }
+        public DateTime? DeadlineDateTime { get; set; }
+        public DateTime? CompliteDateTime { get; set; }
         public TypeOfWork TypeOfWork { get; set; }
         public MachineAreaEntity? MachineArea { get; set; }
         public ServicemanEntity? Serviceman { get; set; }
-
+        public PlannerEngineerEntity? PlannerEngineer { get; set; }
         public ICollection<EquipmentEntity>? Equipments { get; set; }
     }
 }

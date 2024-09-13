@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace MaintenanceSheduleSystem.Persistence.Migrations
 {
     /// <inheritdoc />
@@ -64,8 +66,7 @@ namespace MaintenanceSheduleSystem.Persistence.Migrations
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     MachineId = table.Column<Guid>(type: "uuid", nullable: false),
                     AreaName = table.Column<string>(type: "text", nullable: false),
-                    AreaDescription = table.Column<string>(type: "text", nullable: false),
-                    InstructionId = table.Column<Guid>(type: "uuid", nullable: false)
+                    AreaDescription = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -132,20 +133,19 @@ namespace MaintenanceSheduleSystem.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Handbooks",
+                name: "Instructions",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     AreaId = table.Column<Guid>(type: "uuid", nullable: false),
                     TypeOfWork = table.Column<int>(type: "integer", nullable: false),
-                    Instructions = table.Column<string>(type: "text", nullable: false),
-                    EquipmentListId = table.Column<Guid>(type: "uuid", nullable: false)
+                    Instructions = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Handbooks", x => x.Id);
+                    table.PrimaryKey("PK_Instructions", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Handbooks_MachineAreas_AreaId",
+                        name: "FK_Instructions_MachineAreas_AreaId",
                         column: x => x.AreaId,
                         principalTable: "MachineAreas",
                         principalColumn: "Id",
@@ -157,14 +157,16 @@ namespace MaintenanceSheduleSystem.Persistence.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    MachineId = table.Column<Guid>(type: "uuid", nullable: false),
                     AreaId = table.Column<Guid>(type: "uuid", nullable: false),
                     Name = table.Column<string>(type: "text", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: false),
-                    ServicemanName = table.Column<string>(type: "text", nullable: false),
-                    StartDateTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    BeginWorkDateTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    DeadlineDateTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    CompliteDateTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    PlannerEngineerId = table.Column<Guid>(type: "uuid", nullable: false),
+                    ServicemanId = table.Column<Guid>(type: "uuid", nullable: false),
+                    CreatedDateTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    BeginWorkDateTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    DeadlineDateTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    CompliteDateTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     TypeOfWork = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
@@ -177,35 +179,39 @@ namespace MaintenanceSheduleSystem.Persistence.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Orders_Servicemen_Id",
-                        column: x => x.Id,
+                        name: "FK_Orders_PlannerEngineers_PlannerEngineerId",
+                        column: x => x.PlannerEngineerId,
+                        principalTable: "PlannerEngineers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Orders_Servicemen_ServicemanId",
+                        column: x => x.ServicemanId,
                         principalTable: "Servicemen",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "HandbookEquipment",
+                name: "InstructionEquipment",
                 columns: table => new
                 {
-                    HandbookId = table.Column<Guid>(type: "uuid", nullable: false),
-                    EquipmentId = table.Column<Guid>(type: "uuid", nullable: false),
-                    EquipmentsId = table.Column<Guid>(type: "uuid", nullable: false),
-                    HandbooksId = table.Column<Guid>(type: "uuid", nullable: false)
+                    InstructionId = table.Column<Guid>(type: "uuid", nullable: false),
+                    EquipmentId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_HandbookEquipment", x => new { x.EquipmentId, x.HandbookId });
+                    table.PrimaryKey("PK_InstructionEquipment", x => new { x.InstructionId, x.EquipmentId });
                     table.ForeignKey(
-                        name: "FK_HandbookEquipment_Equipments_EquipmentsId",
-                        column: x => x.EquipmentsId,
+                        name: "FK_InstructionEquipment_Equipments_EquipmentId",
+                        column: x => x.EquipmentId,
                         principalTable: "Equipments",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_HandbookEquipment_Handbooks_HandbooksId",
-                        column: x => x.HandbooksId,
-                        principalTable: "Handbooks",
+                        name: "FK_InstructionEquipment_Instructions_InstructionId",
+                        column: x => x.InstructionId,
+                        principalTable: "Instructions",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -215,50 +221,105 @@ namespace MaintenanceSheduleSystem.Persistence.Migrations
                 columns: table => new
                 {
                     EquipmentId = table.Column<Guid>(type: "uuid", nullable: false),
-                    OrderId = table.Column<Guid>(type: "uuid", nullable: false),
-                    EquipmentsId = table.Column<Guid>(type: "uuid", nullable: false),
-                    OrdersId = table.Column<Guid>(type: "uuid", nullable: false)
+                    OrderId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_OrderEquipment", x => new { x.OrderId, x.EquipmentId });
                     table.ForeignKey(
-                        name: "FK_OrderEquipment_Equipments_EquipmentsId",
-                        column: x => x.EquipmentsId,
+                        name: "FK_OrderEquipment_Equipments_EquipmentId",
+                        column: x => x.EquipmentId,
                         principalTable: "Equipments",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_OrderEquipment_Orders_OrdersId",
-                        column: x => x.OrdersId,
+                        name: "FK_OrderEquipment_Orders_OrderId",
+                        column: x => x.OrderId,
                         principalTable: "Orders",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(
+                table: "Equipments",
+                columns: new[] { "Id", "Article", "Count", "IsInStock", "Name", "StoragePlace", "Type" },
+                values: new object[,]
+                {
+                    { new Guid("1a1db12d-0106-4d06-afc9-8cea47ff876e"), "3421", 2, true, "TestInstrument", "A2", 1 },
+                    { new Guid("f84c16d1-5373-46b1-8340-db980e94bf32"), "12345", 10, true, "TestSpare", "A1", 2 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Machines",
+                columns: new[] { "Id", "Name", "SerialNumber" },
+                values: new object[] { new Guid("baf57b0d-d6dd-481e-8b7b-ba03f57dab9c"), "TestLine", "123" });
+
+            migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "Email", "FullName", "HashedPassword", "IsSacked", "Role" },
-                values: new object[] { new Guid("e9b35245-a567-4802-9fac-a4ff20d7c0c3"), "test@domain.ru", "surname name lastname", "$2a$11$eVLVS62s2vfRQF6ANM7qoutNfbA0r4pcR6BUDv5Hr5N6dZizSr4Di", false, 1 });
+                values: new object[,]
+                {
+                    { new Guid("5ac264b6-7490-48b2-93ca-63204fb0bc7b"), "test@domain.ru", "surname name lastname", "$2a$11$T0wSes1Px3b36eJpNdRHbeshK5Kt6Me2QOCLG8SCPS.dxdJN6P/fC", false, 1 },
+                    { new Guid("69fc24dd-44ed-460e-b183-36da93374664"), "testService@domain.ru", "Test Test Serviceman", "$2a$11$kAm937PqzogwGaKuzd1MfeRDvtAylmSe6E3RM.ca5wRqM.pFf.LM6", false, 3 },
+                    { new Guid("a69b942d-6024-4cb9-99ab-fdb813dda151"), "testPlanner@domain.ru", "Test, Test, Planner", "$2a$11$Vh3n0jyAVetsM6PcR30yJuTyPpo7OFfw3lqBK0qL86pOapvusggPa", false, 2 }
+                });
 
             migrationBuilder.InsertData(
                 table: "Administrators",
                 columns: new[] { "Id", "SigningKey" },
-                values: new object[] { new Guid("e9b35245-a567-4802-9fac-a4ff20d7c0c3"), "" });
+                values: new object[] { new Guid("5ac264b6-7490-48b2-93ca-63204fb0bc7b"), "" });
+
+            migrationBuilder.InsertData(
+                table: "MachineAreas",
+                columns: new[] { "Id", "AreaDescription", "AreaName", "MachineId" },
+                values: new object[] { new Guid("f6cd323f-9c21-4dc6-8533-493a89d6459a"), "TestDesc", "TestArea", new Guid("baf57b0d-d6dd-481e-8b7b-ba03f57dab9c") });
+
+            migrationBuilder.InsertData(
+                table: "PlannerEngineers",
+                columns: new[] { "Id", "Title" },
+                values: new object[] { new Guid("a69b942d-6024-4cb9-99ab-fdb813dda151"), "TestTitle" });
+
+            migrationBuilder.InsertData(
+                table: "Servicemen",
+                column: "Id",
+                value: new Guid("69fc24dd-44ed-460e-b183-36da93374664"));
+
+            migrationBuilder.InsertData(
+                table: "Instructions",
+                columns: new[] { "Id", "AreaId", "Instructions", "TypeOfWork" },
+                values: new object[] { new Guid("c1529764-27da-4207-9d7d-5981d9ba6b34"), new Guid("f6cd323f-9c21-4dc6-8533-493a89d6459a"), "TestDesc", 1 });
+
+            migrationBuilder.InsertData(
+                table: "Orders",
+                columns: new[] { "Id", "AreaId", "BeginWorkDateTime", "CompliteDateTime", "CreatedDateTime", "DeadlineDateTime", "Description", "MachineId", "Name", "PlannerEngineerId", "ServicemanId", "TypeOfWork" },
+                values: new object[] { new Guid("12055903-390d-42e7-b98f-16dfe77f053e"), new Guid("f6cd323f-9c21-4dc6-8533-493a89d6459a"), null, null, new DateTime(2024, 9, 13, 9, 5, 24, 583, DateTimeKind.Utc).AddTicks(6805), null, "TestOrderDesc", new Guid("baf57b0d-d6dd-481e-8b7b-ba03f57dab9c"), "TestOrder", new Guid("a69b942d-6024-4cb9-99ab-fdb813dda151"), new Guid("69fc24dd-44ed-460e-b183-36da93374664"), 1 });
+
+            migrationBuilder.InsertData(
+                table: "InstructionEquipment",
+                columns: new[] { "EquipmentId", "InstructionId" },
+                values: new object[,]
+                {
+                    { new Guid("1a1db12d-0106-4d06-afc9-8cea47ff876e"), new Guid("c1529764-27da-4207-9d7d-5981d9ba6b34") },
+                    { new Guid("f84c16d1-5373-46b1-8340-db980e94bf32"), new Guid("c1529764-27da-4207-9d7d-5981d9ba6b34") }
+                });
+
+            migrationBuilder.InsertData(
+                table: "OrderEquipment",
+                columns: new[] { "EquipmentId", "OrderId" },
+                values: new object[,]
+                {
+                    { new Guid("1a1db12d-0106-4d06-afc9-8cea47ff876e"), new Guid("12055903-390d-42e7-b98f-16dfe77f053e") },
+                    { new Guid("f84c16d1-5373-46b1-8340-db980e94bf32"), new Guid("12055903-390d-42e7-b98f-16dfe77f053e") }
+                });
 
             migrationBuilder.CreateIndex(
-                name: "IX_HandbookEquipment_EquipmentsId",
-                table: "HandbookEquipment",
-                column: "EquipmentsId");
+                name: "IX_InstructionEquipment_EquipmentId",
+                table: "InstructionEquipment",
+                column: "EquipmentId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_HandbookEquipment_HandbooksId",
-                table: "HandbookEquipment",
-                column: "HandbooksId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Handbooks_AreaId",
-                table: "Handbooks",
+                name: "IX_Instructions_AreaId",
+                table: "Instructions",
                 column: "AreaId");
 
             migrationBuilder.CreateIndex(
@@ -267,19 +328,30 @@ namespace MaintenanceSheduleSystem.Persistence.Migrations
                 column: "MachineId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_OrderEquipment_EquipmentsId",
+                name: "IX_OrderEquipment_EquipmentId",
                 table: "OrderEquipment",
-                column: "EquipmentsId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_OrderEquipment_OrdersId",
-                table: "OrderEquipment",
-                column: "OrdersId");
+                column: "EquipmentId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Orders_AreaId",
                 table: "Orders",
                 column: "AreaId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Orders_PlannerEngineerId",
+                table: "Orders",
+                column: "PlannerEngineerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Orders_ServicemanId",
+                table: "Orders",
+                column: "ServicemanId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_Email",
+                table: "Users",
+                column: "Email",
+                unique: true);
         }
 
         /// <inheritdoc />
@@ -289,16 +361,13 @@ namespace MaintenanceSheduleSystem.Persistence.Migrations
                 name: "Administrators");
 
             migrationBuilder.DropTable(
-                name: "HandbookEquipment");
+                name: "InstructionEquipment");
 
             migrationBuilder.DropTable(
                 name: "OrderEquipment");
 
             migrationBuilder.DropTable(
-                name: "PlannerEngineers");
-
-            migrationBuilder.DropTable(
-                name: "Handbooks");
+                name: "Instructions");
 
             migrationBuilder.DropTable(
                 name: "Equipments");
@@ -308,6 +377,9 @@ namespace MaintenanceSheduleSystem.Persistence.Migrations
 
             migrationBuilder.DropTable(
                 name: "MachineAreas");
+
+            migrationBuilder.DropTable(
+                name: "PlannerEngineers");
 
             migrationBuilder.DropTable(
                 name: "Servicemen");

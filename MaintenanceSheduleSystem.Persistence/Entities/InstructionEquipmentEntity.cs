@@ -8,7 +8,7 @@ namespace MaintenanceSheduleSystem.Persistence.Entities
 {
     public class InstructionEquipmentEntity
     {
-        public Guid HandbookId { get; set; }
+        public Guid InstructionId { get; set; }
         public Guid EquipmentId { get; set; }
     }
 }

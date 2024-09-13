@@ -13,7 +13,19 @@ namespace MaintenanceSheduleSystem.Persistence.Configurations
     {
         public void Configure(EntityTypeBuilder<InstructionEquipmentEntity> builder)
         {
-            builder.HasKey(i => new { i.EquipmentId, i.HandbookId });
+            builder.HasKey(i => new { i.InstructionId, i.EquipmentId });
+
+            builder.HasData(
+                new InstructionEquipmentEntity
+                {
+                    InstructionId = Guid.Parse("c1529764-27da-4207-9d7d-5981d9ba6b34"),
+                    EquipmentId = Guid.Parse("f84c16d1-5373-46b1-8340-db980e94bf32"),
+                },
+                new InstructionEquipmentEntity
+                {
+                InstructionId = Guid.Parse("c1529764-27da-4207-9d7d-5981d9ba6b34"),
+                EquipmentId = Guid.Parse("1a1db12d-0106-4d06-afc9-8cea47ff876e"),
+                });
         }
     }
 }

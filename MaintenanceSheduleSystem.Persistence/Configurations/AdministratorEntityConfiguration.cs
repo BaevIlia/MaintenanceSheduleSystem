@@ -20,7 +20,7 @@ namespace MaintenanceSheduleSystem.Persistence.Configurations
             builder.HasData(
                 new AdministratorEntity()
                 {
-                    Id = Guid.NewGuid(),
+                    Id = Guid.Parse("5ac264b6-7490-48b2-93ca-63204fb0bc7b"),
                     FullName = "surname name lastname",
                     Email = "test@domain.ru",
                     HashedPassword = BCrypt.Net.BCrypt.EnhancedHashPassword("1234"),

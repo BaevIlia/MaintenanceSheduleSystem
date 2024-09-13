@@ -15,6 +15,17 @@ namespace MaintenanceSheduleSystem.Persistence.Configurations
         {
             builder.HasMany(sm => sm.Orders)
                 .WithOne(o => o.Serviceman);
+
+            builder.HasData(
+                new ServicemanEntity
+                {
+                    Id = Guid.Parse("69fc24dd-44ed-460e-b183-36da93374664"),
+                    FullName = "Test Test Serviceman",
+                    Email = "testService@domain.ru",
+                    HashedPassword = BCrypt.Net.BCrypt.EnhancedHashPassword("1234"),
+                    Role = Core.Enums.Roles.Service,
+                    IsSacked = false
+                });
         }
     }
 }

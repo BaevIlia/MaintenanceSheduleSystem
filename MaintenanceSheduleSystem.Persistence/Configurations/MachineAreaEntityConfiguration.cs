@@ -25,6 +25,17 @@ namespace MaintenanceSheduleSystem.Persistence.Configurations
             builder.HasMany(ma => ma.Orders)
                 .WithOne(o => o.MachineArea);
 
+            builder.HasData(
+                new MachineAreaEntity
+                {
+
+                    Id = Guid.Parse("f6cd323f-9c21-4dc6-8533-493a89d6459a"),
+                    MachineId = Guid.Parse("baf57b0d-d6dd-481e-8b7b-ba03f57dab9c"),
+                    AreaName = "TestArea",
+                    AreaDescription = "TestDesc"
+
+                });
+
         }
     }
 }
