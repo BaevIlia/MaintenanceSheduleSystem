@@ -14,6 +14,7 @@ namespace MaintenanceSheduleSystem.Application
         {
             services.AddScoped<UserBaseService>();
             services.AddScoped<AdministratorService>();
+            services.AddScoped<OrderService>();
             return services;
         }
     }

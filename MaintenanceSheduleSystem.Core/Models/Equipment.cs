@@ -9,6 +9,11 @@ namespace MaintenanceSheduleSystem.Core.Models
 {
     public class Equipment
     {
+
+        public Equipment()
+        {
+            
+        }
         private Equipment(Guid id, string article, string name, string storagePlace, EquipmentTypes type, int count)
         {
             Id = id;

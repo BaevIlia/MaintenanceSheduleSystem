@@ -19,7 +19,9 @@ namespace MaintenanceSheduleSystem.Application.Services
 
         public async Task<IEnumerable<Order>> GetAllOrders()
         {
-            return new List<Order>();
+            var result = await _orderREpository.GetAllOrders();
+
+            return result;
         }
 
         /*public async Task<Order> GetOrder()

@@ -9,6 +9,11 @@ namespace MaintenanceSheduleSystem.Core.Models
 {
     public class Order
     {
+
+        public Order()
+        {
+            
+        }
         private Order(Guid id,Guid machineId, Guid areaId, string name, string description,
             string servicemanName, DateTime createDate, DateTime deadlineDate, TypeOfWork typeOfWork, List<Equipment> equipments)
         {
@@ -18,7 +23,7 @@ namespace MaintenanceSheduleSystem.Core.Models
             Name = name;
             Description = description;
             ServicemanName = servicemanName;
-            CreateDate = createDate;
+            CreatedDateTime = createDate;
             DeadlineDate = deadlineDate;
             TypeOfWork = typeOfWork;
             Equipments = equipments;
@@ -29,7 +34,7 @@ namespace MaintenanceSheduleSystem.Core.Models
         public string Name { get; set; }= string.Empty;
         public string Description { get; set; } = string.Empty;
         public string ServicemanName { get; set; } = string.Empty;
-        public DateTime CreateDate { get; set; }
+        public DateTime CreatedDateTime { get; set; }
         public DateTime DeadlineDate { get; set; }
         public DateTime StartWorkDate { get; set; } = DateTime.MinValue;
         public DateTime CompliteDate { get; set; } = DateTime.MinValue;

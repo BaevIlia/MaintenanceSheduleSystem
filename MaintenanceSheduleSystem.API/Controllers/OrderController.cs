@@ -1,4 +1,5 @@
-﻿using MaintenanceSheduleSystem.Core.Models;
+﻿using MaintenanceSheduleSystem.Application.Services;
+using MaintenanceSheduleSystem.Core.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MaintenanceSheduleSystem.API.Controllers
@@ -7,12 +8,20 @@ namespace MaintenanceSheduleSystem.API.Controllers
     [Route("[controller]")]
     public class OrderController : ControllerBase
     {
+        private readonly OrderService _orderService;
+
+        public OrderController(OrderService orderService)
+        {
+            _orderService = orderService;
+        }
+
         [HttpGet("orders")]
         public async Task<IActionResult> GetAll()
         {
-            return Ok();
+            
+            var result = await _orderService.GetAllOrders();
 
-
+            return Ok(result);
         }
         [HttpGet("{id}")]
         public async Task<IActionResult> GetOrder()

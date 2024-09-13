@@ -2,11 +2,8 @@
 using MaintenanceSheduleSystem.Core.Interfaces;
 using MaintenanceSheduleSystem.Core.Models;
 using MaintenanceSheduleSystem.Persistence.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using Mapster;
 
 namespace MaintenanceSheduleSystem.Persistence.Repositories
 {
@@ -28,9 +25,18 @@ namespace MaintenanceSheduleSystem.Persistence.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<ICollection<Order>> GetAllOrders()
+        public async Task<ICollection<Order>> GetAllOrders()
         {
-            throw new NotImplementedException();
+            var allOrders = await _dbContext.Orders.Include(e=>e.Equipments).ToListAsync();
+
+            List<Order> result = new();
+
+            foreach (var order in allOrders) 
+            {
+                result.Add(order.Adapt<Order>());
+            }
+
+            return result;
         }
 
         public Task<Order> GetOrderById()
