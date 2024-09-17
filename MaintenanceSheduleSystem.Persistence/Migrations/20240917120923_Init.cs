@@ -197,7 +197,8 @@ namespace MaintenanceSheduleSystem.Persistence.Migrations
                 columns: table => new
                 {
                     InstructionId = table.Column<Guid>(type: "uuid", nullable: false),
-                    EquipmentId = table.Column<Guid>(type: "uuid", nullable: false)
+                    EquipmentId = table.Column<Guid>(type: "uuid", nullable: false),
+                    Count = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -220,8 +221,9 @@ namespace MaintenanceSheduleSystem.Persistence.Migrations
                 name: "OrderEquipment",
                 columns: table => new
                 {
+                    OrderId = table.Column<Guid>(type: "uuid", nullable: false),
                     EquipmentId = table.Column<Guid>(type: "uuid", nullable: false),
-                    OrderId = table.Column<Guid>(type: "uuid", nullable: false)
+                    EquipmentCount = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -259,9 +261,9 @@ namespace MaintenanceSheduleSystem.Persistence.Migrations
                 columns: new[] { "Id", "Email", "FullName", "HashedPassword", "IsSacked", "Role" },
                 values: new object[,]
                 {
-                    { new Guid("5ac264b6-7490-48b2-93ca-63204fb0bc7b"), "test@domain.ru", "surname name lastname", "$2a$11$T0wSes1Px3b36eJpNdRHbeshK5Kt6Me2QOCLG8SCPS.dxdJN6P/fC", false, 1 },
-                    { new Guid("69fc24dd-44ed-460e-b183-36da93374664"), "testService@domain.ru", "Test Test Serviceman", "$2a$11$kAm937PqzogwGaKuzd1MfeRDvtAylmSe6E3RM.ca5wRqM.pFf.LM6", false, 3 },
-                    { new Guid("a69b942d-6024-4cb9-99ab-fdb813dda151"), "testPlanner@domain.ru", "Test, Test, Planner", "$2a$11$Vh3n0jyAVetsM6PcR30yJuTyPpo7OFfw3lqBK0qL86pOapvusggPa", false, 2 }
+                    { new Guid("5ac264b6-7490-48b2-93ca-63204fb0bc7b"), "test@domain.ru", "surname name lastname", "$2a$11$x8bWa043.gamnoLShZzhd.5pnkgFjao7KLpXN7Vg5nJQW1O6XGiiu", false, 1 },
+                    { new Guid("69fc24dd-44ed-460e-b183-36da93374664"), "testService@domain.ru", "Test Test Serviceman", "$2a$11$LiU42UKhNy4rPTDCHpBVwOAG61HbRNlyQMGGR2iuPE3wyW.YqRMw.", false, 3 },
+                    { new Guid("a69b942d-6024-4cb9-99ab-fdb813dda151"), "testPlanner@domain.ru", "Test, Test, Planner", "$2a$11$G9kLyGRTrQDdyU0l92d80uU/J2shCzQzaFxZjMLbdAQumJUhbk.8C", false, 2 }
                 });
 
             migrationBuilder.InsertData(
@@ -285,31 +287,17 @@ namespace MaintenanceSheduleSystem.Persistence.Migrations
                 value: new Guid("69fc24dd-44ed-460e-b183-36da93374664"));
 
             migrationBuilder.InsertData(
-                table: "Instructions",
-                columns: new[] { "Id", "AreaId", "Instructions", "TypeOfWork" },
-                values: new object[] { new Guid("c1529764-27da-4207-9d7d-5981d9ba6b34"), new Guid("f6cd323f-9c21-4dc6-8533-493a89d6459a"), "TestDesc", 1 });
-
-            migrationBuilder.InsertData(
                 table: "Orders",
                 columns: new[] { "Id", "AreaId", "BeginWorkDateTime", "CompliteDateTime", "CreatedDateTime", "DeadlineDateTime", "Description", "MachineId", "Name", "PlannerEngineerId", "ServicemanId", "TypeOfWork" },
-                values: new object[] { new Guid("12055903-390d-42e7-b98f-16dfe77f053e"), new Guid("f6cd323f-9c21-4dc6-8533-493a89d6459a"), null, null, new DateTime(2024, 9, 13, 9, 5, 24, 583, DateTimeKind.Utc).AddTicks(6805), null, "TestOrderDesc", new Guid("baf57b0d-d6dd-481e-8b7b-ba03f57dab9c"), "TestOrder", new Guid("a69b942d-6024-4cb9-99ab-fdb813dda151"), new Guid("69fc24dd-44ed-460e-b183-36da93374664"), 1 });
-
-            migrationBuilder.InsertData(
-                table: "InstructionEquipment",
-                columns: new[] { "EquipmentId", "InstructionId" },
-                values: new object[,]
-                {
-                    { new Guid("1a1db12d-0106-4d06-afc9-8cea47ff876e"), new Guid("c1529764-27da-4207-9d7d-5981d9ba6b34") },
-                    { new Guid("f84c16d1-5373-46b1-8340-db980e94bf32"), new Guid("c1529764-27da-4207-9d7d-5981d9ba6b34") }
-                });
+                values: new object[] { new Guid("12055903-390d-42e7-b98f-16dfe77f053e"), new Guid("f6cd323f-9c21-4dc6-8533-493a89d6459a"), null, null, new DateTime(2024, 9, 17, 12, 9, 22, 657, DateTimeKind.Utc).AddTicks(949), null, "TestOrderDesc", new Guid("baf57b0d-d6dd-481e-8b7b-ba03f57dab9c"), "TestOrder", new Guid("a69b942d-6024-4cb9-99ab-fdb813dda151"), new Guid("69fc24dd-44ed-460e-b183-36da93374664"), 1 });
 
             migrationBuilder.InsertData(
                 table: "OrderEquipment",
-                columns: new[] { "EquipmentId", "OrderId" },
+                columns: new[] { "EquipmentId", "OrderId", "EquipmentCount" },
                 values: new object[,]
                 {
-                    { new Guid("1a1db12d-0106-4d06-afc9-8cea47ff876e"), new Guid("12055903-390d-42e7-b98f-16dfe77f053e") },
-                    { new Guid("f84c16d1-5373-46b1-8340-db980e94bf32"), new Guid("12055903-390d-42e7-b98f-16dfe77f053e") }
+                    { new Guid("1a1db12d-0106-4d06-afc9-8cea47ff876e"), new Guid("12055903-390d-42e7-b98f-16dfe77f053e"), 1 },
+                    { new Guid("f84c16d1-5373-46b1-8340-db980e94bf32"), new Guid("12055903-390d-42e7-b98f-16dfe77f053e"), 1 }
                 });
 
             migrationBuilder.CreateIndex(

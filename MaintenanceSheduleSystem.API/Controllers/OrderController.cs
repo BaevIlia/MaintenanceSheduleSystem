@@ -24,9 +24,10 @@ namespace MaintenanceSheduleSystem.API.Controllers
             return Ok(result);
         }
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetOrder()
+        public async Task<IActionResult> GetOrder(string id)
         {
-            return Ok();
+            var result = await _orderService.GetOrder(id);
+            return Ok(result);
         }
 
         [HttpPost("create")]

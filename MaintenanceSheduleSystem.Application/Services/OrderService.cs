@@ -24,10 +24,12 @@ namespace MaintenanceSheduleSystem.Application.Services
             return result;
         }
 
-        /*public async Task<Order> GetOrder()
+        public async Task<Order> GetOrder(string id)
         {
-           
-        }*/
+            var result = await _orderREpository.GetOrderById(Guid.Parse(id));
+
+            return result;
+        }
 
         public async Task<Guid> CreateOrder() 
         {

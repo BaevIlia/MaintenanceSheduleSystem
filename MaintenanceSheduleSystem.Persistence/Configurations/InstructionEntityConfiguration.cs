@@ -20,18 +20,10 @@ namespace MaintenanceSheduleSystem.Persistence.Configurations
                 .WithMany(ma => ma.Instructions)
                 .HasForeignKey(h => h.AreaId);
 
-            builder.HasMany(h => h.Equipments)
-                .WithMany(eq => eq.Instructions)
-                .UsingEntity<InstructionEquipmentEntity>();
+            builder.HasMany(i => i.InstructionEquipmentLists)
+                .WithOne(il => il.Instruction)
+                .HasForeignKey(il => il.InstructionId);
 
-            builder.HasData(
-                new InstructionEntity
-                {
-                    Id = Guid.Parse("c1529764-27da-4207-9d7d-5981d9ba6b34"),
-                    AreaId = Guid.Parse("f6cd323f-9c21-4dc6-8533-493a89d6459a"),
-                    TypeOfWork = Core.Enums.TypeOfWork.Maintenance,
-                    Instructions = "TestDesc",
-                });
             
         }
     }

@@ -97,18 +97,9 @@ namespace MaintenanceSheduleSystem.Persistence.Migrations
                     b.HasIndex("AreaId");
 
                     b.ToTable("Instructions");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("c1529764-27da-4207-9d7d-5981d9ba6b34"),
-                            AreaId = new Guid("f6cd323f-9c21-4dc6-8533-493a89d6459a"),
-                            Instructions = "TestDesc",
-                            TypeOfWork = 1
-                        });
                 });
 
-            modelBuilder.Entity("MaintenanceSheduleSystem.Persistence.Entities.InstructionEquipmentEntity", b =>
+            modelBuilder.Entity("MaintenanceSheduleSystem.Persistence.Entities.InstructionEquipmentListEntity", b =>
                 {
                     b.Property<Guid>("InstructionId")
                         .HasColumnType("uuid");
@@ -116,23 +107,14 @@ namespace MaintenanceSheduleSystem.Persistence.Migrations
                     b.Property<Guid>("EquipmentId")
                         .HasColumnType("uuid");
 
+                    b.Property<int>("Count")
+                        .HasColumnType("integer");
+
                     b.HasKey("InstructionId", "EquipmentId");
 
                     b.HasIndex("EquipmentId");
 
                     b.ToTable("InstructionEquipment");
-
-                    b.HasData(
-                        new
-                        {
-                            InstructionId = new Guid("c1529764-27da-4207-9d7d-5981d9ba6b34"),
-                            EquipmentId = new Guid("f84c16d1-5373-46b1-8340-db980e94bf32")
-                        },
-                        new
-                        {
-                            InstructionId = new Guid("c1529764-27da-4207-9d7d-5981d9ba6b34"),
-                            EquipmentId = new Guid("1a1db12d-0106-4d06-afc9-8cea47ff876e")
-                        });
                 });
 
             modelBuilder.Entity("MaintenanceSheduleSystem.Persistence.Entities.MachineAreaEntity", b =>
@@ -251,7 +233,7 @@ namespace MaintenanceSheduleSystem.Persistence.Migrations
                         {
                             Id = new Guid("12055903-390d-42e7-b98f-16dfe77f053e"),
                             AreaId = new Guid("f6cd323f-9c21-4dc6-8533-493a89d6459a"),
-                            CreatedDateTime = new DateTime(2024, 9, 13, 9, 5, 24, 583, DateTimeKind.Utc).AddTicks(6805),
+                            CreatedDateTime = new DateTime(2024, 9, 17, 12, 9, 22, 657, DateTimeKind.Utc).AddTicks(949),
                             Description = "TestOrderDesc",
                             MachineId = new Guid("baf57b0d-d6dd-481e-8b7b-ba03f57dab9c"),
                             Name = "TestOrder",
@@ -261,13 +243,16 @@ namespace MaintenanceSheduleSystem.Persistence.Migrations
                         });
                 });
 
-            modelBuilder.Entity("MaintenanceSheduleSystem.Persistence.Entities.OrderEquipmentEntity", b =>
+            modelBuilder.Entity("MaintenanceSheduleSystem.Persistence.Entities.OrderEquipmentListEntity", b =>
                 {
                     b.Property<Guid>("OrderId")
                         .HasColumnType("uuid");
 
                     b.Property<Guid>("EquipmentId")
                         .HasColumnType("uuid");
+
+                    b.Property<int>("EquipmentCount")
+                        .HasColumnType("integer");
 
                     b.HasKey("OrderId", "EquipmentId");
 
@@ -279,12 +264,14 @@ namespace MaintenanceSheduleSystem.Persistence.Migrations
                         new
                         {
                             OrderId = new Guid("12055903-390d-42e7-b98f-16dfe77f053e"),
-                            EquipmentId = new Guid("f84c16d1-5373-46b1-8340-db980e94bf32")
+                            EquipmentId = new Guid("f84c16d1-5373-46b1-8340-db980e94bf32"),
+                            EquipmentCount = 1
                         },
                         new
                         {
                             OrderId = new Guid("12055903-390d-42e7-b98f-16dfe77f053e"),
-                            EquipmentId = new Guid("1a1db12d-0106-4d06-afc9-8cea47ff876e")
+                            EquipmentId = new Guid("1a1db12d-0106-4d06-afc9-8cea47ff876e"),
+                            EquipmentCount = 1
                         });
                 });
 
@@ -337,7 +324,7 @@ namespace MaintenanceSheduleSystem.Persistence.Migrations
                             Id = new Guid("5ac264b6-7490-48b2-93ca-63204fb0bc7b"),
                             Email = "test@domain.ru",
                             FullName = "surname name lastname",
-                            HashedPassword = "$2a$11$T0wSes1Px3b36eJpNdRHbeshK5Kt6Me2QOCLG8SCPS.dxdJN6P/fC",
+                            HashedPassword = "$2a$11$x8bWa043.gamnoLShZzhd.5pnkgFjao7KLpXN7Vg5nJQW1O6XGiiu",
                             IsSacked = false,
                             Role = 1,
                             SigningKey = ""
@@ -360,7 +347,7 @@ namespace MaintenanceSheduleSystem.Persistence.Migrations
                             Id = new Guid("a69b942d-6024-4cb9-99ab-fdb813dda151"),
                             Email = "testPlanner@domain.ru",
                             FullName = "Test, Test, Planner",
-                            HashedPassword = "$2a$11$Vh3n0jyAVetsM6PcR30yJuTyPpo7OFfw3lqBK0qL86pOapvusggPa",
+                            HashedPassword = "$2a$11$G9kLyGRTrQDdyU0l92d80uU/J2shCzQzaFxZjMLbdAQumJUhbk.8C",
                             IsSacked = false,
                             Role = 2,
                             Title = "TestTitle"
@@ -379,7 +366,7 @@ namespace MaintenanceSheduleSystem.Persistence.Migrations
                             Id = new Guid("69fc24dd-44ed-460e-b183-36da93374664"),
                             Email = "testService@domain.ru",
                             FullName = "Test Test Serviceman",
-                            HashedPassword = "$2a$11$kAm937PqzogwGaKuzd1MfeRDvtAylmSe6E3RM.ca5wRqM.pFf.LM6",
+                            HashedPassword = "$2a$11$LiU42UKhNy4rPTDCHpBVwOAG61HbRNlyQMGGR2iuPE3wyW.YqRMw.",
                             IsSacked = false,
                             Role = 3
                         });
@@ -396,19 +383,23 @@ namespace MaintenanceSheduleSystem.Persistence.Migrations
                     b.Navigation("MachineArea");
                 });
 
-            modelBuilder.Entity("MaintenanceSheduleSystem.Persistence.Entities.InstructionEquipmentEntity", b =>
+            modelBuilder.Entity("MaintenanceSheduleSystem.Persistence.Entities.InstructionEquipmentListEntity", b =>
                 {
-                    b.HasOne("MaintenanceSheduleSystem.Persistence.Entities.EquipmentEntity", null)
-                        .WithMany()
+                    b.HasOne("MaintenanceSheduleSystem.Persistence.Entities.EquipmentEntity", "Equipment")
+                        .WithMany("InstructionEquipmentLists")
                         .HasForeignKey("EquipmentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("MaintenanceSheduleSystem.Persistence.Entities.InstructionEntity", null)
-                        .WithMany()
+                    b.HasOne("MaintenanceSheduleSystem.Persistence.Entities.InstructionEntity", "Instruction")
+                        .WithMany("InstructionEquipmentLists")
                         .HasForeignKey("InstructionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Equipment");
+
+                    b.Navigation("Instruction");
                 });
 
             modelBuilder.Entity("MaintenanceSheduleSystem.Persistence.Entities.MachineAreaEntity", b =>
@@ -449,19 +440,23 @@ namespace MaintenanceSheduleSystem.Persistence.Migrations
                     b.Navigation("Serviceman");
                 });
 
-            modelBuilder.Entity("MaintenanceSheduleSystem.Persistence.Entities.OrderEquipmentEntity", b =>
+            modelBuilder.Entity("MaintenanceSheduleSystem.Persistence.Entities.OrderEquipmentListEntity", b =>
                 {
-                    b.HasOne("MaintenanceSheduleSystem.Persistence.Entities.EquipmentEntity", null)
-                        .WithMany()
+                    b.HasOne("MaintenanceSheduleSystem.Persistence.Entities.EquipmentEntity", "Equipment")
+                        .WithMany("OrderEquipmentLists")
                         .HasForeignKey("EquipmentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("MaintenanceSheduleSystem.Persistence.Entities.OrderEntity", null)
-                        .WithMany()
+                    b.HasOne("MaintenanceSheduleSystem.Persistence.Entities.OrderEntity", "Order")
+                        .WithMany("OrderEquipmentList")
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Equipment");
+
+                    b.Navigation("Order");
                 });
 
             modelBuilder.Entity("MaintenanceSheduleSystem.Persistence.Entities.AdministratorEntity", b =>
@@ -491,6 +486,18 @@ namespace MaintenanceSheduleSystem.Persistence.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("MaintenanceSheduleSystem.Persistence.Entities.EquipmentEntity", b =>
+                {
+                    b.Navigation("InstructionEquipmentLists");
+
+                    b.Navigation("OrderEquipmentLists");
+                });
+
+            modelBuilder.Entity("MaintenanceSheduleSystem.Persistence.Entities.InstructionEntity", b =>
+                {
+                    b.Navigation("InstructionEquipmentLists");
+                });
+
             modelBuilder.Entity("MaintenanceSheduleSystem.Persistence.Entities.MachineAreaEntity", b =>
                 {
                     b.Navigation("Instructions");
@@ -501,6 +508,11 @@ namespace MaintenanceSheduleSystem.Persistence.Migrations
             modelBuilder.Entity("MaintenanceSheduleSystem.Persistence.Entities.MachineEntity", b =>
                 {
                     b.Navigation("MachineAreas");
+                });
+
+            modelBuilder.Entity("MaintenanceSheduleSystem.Persistence.Entities.OrderEntity", b =>
+                {
+                    b.Navigation("OrderEquipmentList");
                 });
 
             modelBuilder.Entity("MaintenanceSheduleSystem.Persistence.Entities.PlannerEngineerEntity", b =>

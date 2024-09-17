@@ -15,7 +15,7 @@ namespace MaintenanceSheduleSystem.Persistence.Entities
         public string Instructions { get; set; } = string.Empty;
 
         public MachineAreaEntity? MachineArea { get; set; }
-        public ICollection<EquipmentEntity>? Equipments { get; set; }
+        public ICollection<InstructionEquipmentListEntity>? InstructionEquipmentLists { get; set; }
   
     }
 }

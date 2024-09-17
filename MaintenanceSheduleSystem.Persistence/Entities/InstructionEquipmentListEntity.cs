@@ -6,9 +6,13 @@ using System.Threading.Tasks;
 
 namespace MaintenanceSheduleSystem.Persistence.Entities
 {
-    public class InstructionEquipmentEntity
+    public class InstructionEquipmentListEntity
     {
         public Guid InstructionId { get; set; }
         public Guid EquipmentId { get; set; }
+        public int Count { get; set; }
+
+        public InstructionEntity? Instruction { get; set; }
+        public EquipmentEntity? Equipment { get; set; }
     }
 }

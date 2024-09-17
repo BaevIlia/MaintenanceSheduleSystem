@@ -25,6 +25,6 @@ namespace MaintenanceSheduleSystem.Persistence.Entities
         public MachineAreaEntity? MachineArea { get; set; }
         public ServicemanEntity? Serviceman { get; set; }
         public PlannerEngineerEntity? PlannerEngineer { get; set; }
-        public ICollection<EquipmentEntity>? Equipments { get; set; }
+        public ICollection<OrderEquipmentListEntity>? OrderEquipmentList { get; set; }
     }
 }

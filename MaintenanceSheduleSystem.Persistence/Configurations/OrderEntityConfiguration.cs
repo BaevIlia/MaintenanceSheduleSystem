@@ -28,9 +28,9 @@ namespace MaintenanceSheduleSystem.Persistence.Configurations
                 .WithMany(ma => ma.Orders)
                 .HasForeignKey(a => a.AreaId);
 
-            builder.HasMany(o => o.Equipments)
-                .WithMany(e => e.Orders)
-                .UsingEntity<OrderEquipmentEntity>();
+            builder.HasMany(o => o.OrderEquipmentList)
+                .WithOne(el => el.Order)
+                .HasForeignKey(el => el.OrderId);
 
             builder.HasData(
                 new OrderEntity
@@ -43,7 +43,7 @@ namespace MaintenanceSheduleSystem.Persistence.Configurations
                     PlannerEngineerId = Guid.Parse("a69b942d-6024-4cb9-99ab-fdb813dda151"),
                     ServicemanId = Guid.Parse("69fc24dd-44ed-460e-b183-36da93374664"),
                     CreatedDateTime = DateTime.UtcNow,
-                    TypeOfWork = Core.Enums.TypeOfWork.Maintenance,
+                    TypeOfWork = Core.Enums.TypeOfWork.Maintenance
 
 
 
